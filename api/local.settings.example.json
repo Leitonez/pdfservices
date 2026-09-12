@@ -1,0 +1,24 @@
+{
+    "IsEncrypted": false,
+    "Values": {
+        "AzureWebJobsStorage": "",
+        "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
+        "Cosmos__ConnectionString": "AccountEndpoint=https://<account>.documents.azure.com:443/;AccountKey=<key>;",
+        "Cosmos__DatabaseName": "Development",
+        "Auth__JwtSigningKey": "<base64 of at least 32 random bytes>",
+        "Turnstile__SecretKey": "1x0000000000000000000000000000000AA",
+        "Turnstile__AllowedHostnames": "",
+        "Mailgun__ApiKey": "<mailgun sending key>",
+        "Mailgun__Domain": "mail.pdfservices.sistema.site",
+        "Mailgun__FromAddress": "autenticacao@mail.pdfservices.sistema.site",
+        "Mailgun__BaseUrl": "https://api.mailgun.net",
+        "Mailgun__TestMode": "true",
+        "App__WebsiteUrl": "http://localhost:5501",
+        "App__AdminUrl": "http://localhost:5502"
+    },
+    "Host": {
+        "LocalHttpPort": 7215,
+        "CORS": "http://localhost:5501,http://localhost:5502",
+        "CORSCredentials": false
+    }
+}

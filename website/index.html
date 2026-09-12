@@ -1,0 +1,613 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PDF Services · API de HTML para PDF com iText | CODECYCLE</title>
+  <meta name="description" content="API HTTP que converte HTML em PDF com iText pdfHTML. Pague só por conversão bem-sucedida, sem mensalidade. Seu HTML e seu PDF nunca são armazenados. Código aberto sob AGPL v3.">
+  <link rel="canonical" href="https://pdfservices.sistema.site/">
+  <meta name="theme-color" content="#0b1120">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="PDF Services · CODECYCLE">
+  <meta property="og:title" content="PDF Services · HTML entra. PDF sai.">
+  <meta property="og:description" content="API de HTML para PDF com iText. Pague por uso, sem armazenar seus documentos, com código aberto (AGPL v3).">
+  <meta property="og:url" content="https://pdfservices.sistema.site/">
+  <meta property="og:image" content="https://pdfservices.sistema.site/assets/img/logo-icon.png">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" type="image/png" href="assets/img/logo-icon.png">
+  <link rel="apple-touch-icon" href="assets/img/logo-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="assets/css/theme.css">
+  <link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body class="site">
+  <svg class="sprite" aria-hidden="true" focusable="false">
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+    <symbol id="i-github" viewBox="0 0 24 24"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></symbol>
+    <symbol id="i-building" viewBox="0 0 24 24"><rect width="16" height="20" x="4" y="2" rx="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></symbol>
+    <symbol id="i-key" viewBox="0 0 24 24"><circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6"/><path d="m15.5 7.5 3 3L22 7l-3-3"/></symbol>
+    <symbol id="i-zap" viewBox="0 0 24 24"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></symbol>
+    <symbol id="i-cpu" viewBox="0 0 24 24"><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="6" height="6" x="9" y="9" rx="1"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/></symbol>
+    <symbol id="i-code" viewBox="0 0 24 24"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></symbol>
+    <symbol id="i-layout" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></symbol>
+    <symbol id="i-break" viewBox="0 0 24 24"><path d="m16 16-4 4-4-4"/><path d="M3 12h18"/><path d="m8 8 4-4 4 4"/></symbol>
+    <symbol id="i-table" viewBox="0 0 24 24"><path d="M12 3v18"/><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M3 15h18"/></symbol>
+    <symbol id="i-type" viewBox="0 0 24 24"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" x2="15" y1="20" y2="20"/><line x1="12" x2="12" y1="4" y2="20"/></symbol>
+    <symbol id="i-image" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></symbol>
+    <symbol id="i-scale" viewBox="0 0 24 24"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></symbol>
+  </svg>
+
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <header id="site-header" class="site-header" data-base=""></header>
+
+  <main id="conteudo" tabindex="-1">
+    <!-- Hero -->
+    <section class="hero has-glow" aria-labelledby="hero-title">
+      <div class="page-glow grid-bg" aria-hidden="true"></div>
+      <div class="container hero-grid">
+        <div>
+          <span class="prompt-pill"><span class="dollar">$</span> pdfservices --init <span class="cursor" aria-hidden="true"></span></span>
+          <h1 id="hero-title"><span class="line">HTML entra.</span> <span class="line grad">PDF sai.</span></h1>
+          <p class="lead">Uma API HTTP simples que transforma o seu HTML em PDF com o motor <strong>iText pdfHTML</strong>. Você paga só pelas conversões bem-sucedidas, seus documentos nunca são armazenados e todo o código é aberto.</p>
+          <div class="cta-row">
+            <a class="btn btn-primary btn-lg" href="cadastro/">Criar conta <svg class="i i-sm" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            <a class="btn btn-ghost btn-lg" :href="config.sourceCodeUrl" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-github"/></svg> Ver código no GitHub</a>
+          </div>
+          <ul class="hero-points">
+            <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg> Sem mensalidade</li>
+            <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg> Nada fica armazenado</li>
+            <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg> Código aberto (AGPL v3)</li>
+            <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg> Só para empresas (CNPJ)</li>
+          </ul>
+        </div>
+
+        <div class="hero-visual">
+          <figure class="code window" aria-labelledby="hero-code-caption">
+            <figcaption id="hero-code-caption" class="sr-only">Exemplo: envio de um arquivo HTML com cURL e os headers da resposta da API.</figcaption>
+            <div class="code-header">
+              <span class="code-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span class="code-title">bash — gerar-nota.sh</span>
+              <span aria-hidden="true">200 OK</span>
+            </div>
+<pre><code><span class="prompt-sign">$</span> curl -X POST https://api.pdfservices.sistema.site/v1/html2pdf/html \
+    -H <span class="s">"X-Api-Key: pdfs_••••••••••••"</span> \
+    -H <span class="s">"Content-Type: text/html; charset=utf-8"</span> \
+    --data-binary @nota.html -o nota.pdf -D -
+
+<span class="ok">HTTP/1.1 200 OK</span>
+<span class="p">Content-Type</span>: application/pdf
+<span class="p">X-Transaction-Id</span>: 9f3c2a7e5b1d4c08a6e2f0b7d91c3a54
+<span class="p">X-Charged-Amount</span>: <span class="n" v-cloak>{{ priceRaw }}</span>
+<span class="p">X-Balance</span>: <span class="n">49.999</span></code></pre>
+          </figure>
+          <div class="pdf-chip" aria-hidden="true">
+            <span class="file">PDF</span>
+            <div><strong>nota.pdf</strong><span class="meta">pronto · 0 bytes guardados no servidor</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Highlights -->
+    <section class="section-tight" aria-label="Destaques">
+      <div class="container">
+        <dl class="stats">
+          <div class="stat"><dt>por conversão bem-sucedida</dt><dd><span class="violet" v-cloak>{{ priceLabel }}</span></dd></div>
+          <div class="stat"><dt>do seu HTML armazenados</dt><dd><span class="green">0 bytes</span></dd></div>
+          <div class="stat"><dt>por requisição</dt><dd><span class="accent">1 MB</span></dd></div>
+          <div class="stat"><dt>código aberto (AGPL v3)</dt><dd><span class="pink">100%</span></dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section id="como-funciona" class="section" aria-labelledby="como-title">
+      <div class="container">
+        <div class="section-head">
+          <span class="kicker">// como funciona</span>
+          <h2 id="como-title">Do cadastro ao primeiro PDF em três passos</h2>
+          <p>Sem SDK obrigatório e sem fila: uma requisição HTTP com o seu HTML devolve o PDF pronto na resposta.</p>
+        </div>
+        <ol class="steps">
+          <li class="card step">
+            <div class="step-top"><span class="icon-tile"><svg class="i" aria-hidden="true"><use href="#i-building"/></svg></span><span class="step-num">01</span></div>
+            <h3>Crie a conta da empresa</h3>
+            <p>Cadastre-se com o CNPJ da empresa e confirme o e-mail pelo link que enviamos. O acesso ao painel é liberado após a confirmação.</p>
+            <div class="snippet">pdfservices.sistema.site/cadastro</div>
+          </li>
+          <li class="card step">
+            <div class="step-top"><span class="icon-tile cyan"><svg class="i" aria-hidden="true"><use href="#i-key"/></svg></span><span class="step-num">02</span></div>
+            <h3>Gere uma chave de API</h3>
+            <p>No painel, crie uma chave: ela aparece uma única vez e é guardada por nós só como hash. Para converter, a conta precisa de saldo em créditos.</p>
+            <div class="snippet">X-Api-Key: pdfs_••••••••••••</div>
+          </li>
+          <li class="card step">
+            <div class="step-top"><span class="icon-tile pink"><svg class="i" aria-hidden="true"><use href="#i-zap"/></svg></span><span class="step-num">03</span></div>
+            <h3>Envie HTML, receba PDF</h3>
+            <p>Faça um POST com o HTML e receba o PDF como resposta. Cada conversão bem-sucedida debita o preço vigente do seu saldo.</p>
+            <div class="snippet">POST /v1/html2pdf/html → application/pdf</div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Integration -->
+    <section id="integracao" class="section section-alt" aria-labelledby="integracao-title">
+      <div class="container split">
+        <div>
+          <span class="kicker">// integração</span>
+          <h2 id="integracao-title">Integre em minutos, em qualquer linguagem</h2>
+          <p class="muted">Dois formatos de envio, a mesma resposta: o PDF em <code>application/pdf</code>. Base: <code>https://api.pdfservices.sistema.site</code></p>
+
+          <ul class="endpoint-list">
+            <li class="endpoint"><span class="method">POST</span><code>/v1/html2pdf/html</code><small>Corpo: o próprio HTML, com <code>Content-Type: text/html; charset=utf-8</code></small></li>
+            <li class="endpoint"><span class="method">POST</span><code>/v1/html2pdf/json</code><small>Corpo: <code>{"html": "..."}</code>, com <code>Content-Type: application/json</code></small></li>
+          </ul>
+
+          <h3 class="mini-title">Autenticação</h3>
+          <p class="muted">Envie sua chave no header <code>X-Api-Key: pdfs_...</code>. Use a chave só no seu servidor, nunca no navegador.</p>
+
+          <h3 class="mini-title">Headers da resposta</h3>
+          <ul class="check-list" style="margin-bottom: 24px">
+            <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><code>X-Transaction-Id</code> identifica a conversão no seu relatório de consumo.</span></li>
+            <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><code>X-Charged-Amount</code> é o valor cobrado, em R$.</span></li>
+            <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><code>X-Balance</code> é o saldo restante depois da cobrança.</span></li>
+          </ul>
+
+          <h3 class="mini-title">Erros (JSON: <code>{ "error", "message" }</code>)</h3>
+          <div class="table-wrap">
+            <table class="table error-table">
+              <thead><tr><th scope="col">HTTP</th><th scope="col">Código</th><th scope="col">Quando</th></tr></thead>
+              <tbody>
+                <tr><td>401</td><td><code>invalid_api_key</code></td><td>Chave ausente, inválida ou revogada.</td></tr>
+                <tr><td>402</td><td><code>insufficient_balance</code></td><td>Saldo insuficiente para a conversão.</td></tr>
+                <tr><td>413</td><td><code>payload_too_large</code></td><td>Requisição acima de 1 MB.</td></tr>
+                <tr><td>422</td><td><code>conversion_failed</code></td><td>O HTML não pôde ser convertido. Não é cobrado.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="code window">
+          <div class="tabs" role="tablist" aria-label="Linguagem do exemplo" @keydown="onTabKey">
+            <button id="tab-curl" class="tab" type="button" role="tab" aria-controls="panel-curl" :aria-selected="tab === 'curl' ? 'true' : 'false'" :tabindex="tab === 'curl' ? 0 : -1" @click="selectTab('curl')">cURL</button>
+            <button id="tab-csharp" class="tab" type="button" role="tab" aria-controls="panel-csharp" :aria-selected="tab === 'csharp' ? 'true' : 'false'" :tabindex="tab === 'csharp' ? 0 : -1" @click="selectTab('csharp')">C# (HttpClient)</button>
+            <button id="tab-node" class="tab" type="button" role="tab" aria-controls="panel-node" :aria-selected="tab === 'node' ? 'true' : 'false'" :tabindex="tab === 'node' ? 0 : -1" @click="selectTab('node')">Node.js (fetch)</button>
+            <button id="tab-python" class="tab" type="button" role="tab" aria-controls="panel-python" :aria-selected="tab === 'python' ? 'true' : 'false'" :tabindex="tab === 'python' ? 0 : -1" @click="selectTab('python')">Python (requests)</button>
+            <button id="tab-php" class="tab" type="button" role="tab" aria-controls="panel-php" :aria-selected="tab === 'php' ? 'true' : 'false'" :tabindex="tab === 'php' ? 0 : -1" @click="selectTab('php')">PHP</button>
+          </div>
+
+          <div id="panel-curl" class="tab-panel" role="tabpanel" aria-labelledby="tab-curl" v-show="tab === 'curl'">
+<pre id="code-curl" v-pre><code><span class="c"># HTML direto no corpo da requisição</span>
+curl -X POST https://api.pdfservices.sistema.site/v1/html2pdf/html \
+  -H <span class="s">"X-Api-Key: $PDFSERVICES_API_KEY"</span> \
+  -H <span class="s">"Content-Type: text/html; charset=utf-8"</span> \
+  --data-binary @documento.html \
+  -o documento.pdf
+
+<span class="c"># Ou em JSON</span>
+curl -X POST https://api.pdfservices.sistema.site/v1/html2pdf/json \
+  -H <span class="s">"X-Api-Key: $PDFSERVICES_API_KEY"</span> \
+  -H <span class="s">"Content-Type: application/json"</span> \
+  -d <span class="s">'{"html": "&lt;h1&gt;Olá, PDF!&lt;/h1&gt;"}'</span> \
+  -o documento.pdf</code></pre>
+          </div>
+
+          <div id="panel-csharp" class="tab-panel" role="tabpanel" aria-labelledby="tab-csharp" v-show="tab === 'csharp'" v-cloak>
+<pre id="code-csharp" v-pre><code><span class="k">using</span> System.Text;
+
+<span class="k">using var</span> http = <span class="k">new</span> HttpClient();
+http.DefaultRequestHeaders.Add(<span class="s">"X-Api-Key"</span>, Environment.GetEnvironmentVariable(<span class="s">"PDFSERVICES_API_KEY"</span>));
+
+<span class="k">var</span> html = <span class="s">"&lt;h1&gt;Olá, PDF!&lt;/h1&gt;&lt;p&gt;Gerado com PDF Services.&lt;/p&gt;"</span>;
+<span class="k">using var</span> content = <span class="k">new</span> StringContent(html, Encoding.UTF8, <span class="s">"text/html"</span>);
+<span class="k">using var</span> response = <span class="k">await</span> http.PostAsync(
+    <span class="s">"https://api.pdfservices.sistema.site/v1/html2pdf/html"</span>, content);
+
+<span class="k">if</span> (!response.IsSuccessStatusCode)
+    <span class="k">throw new</span> Exception(<span class="k">await</span> response.Content.ReadAsStringAsync());
+
+<span class="k">await</span> File.WriteAllBytesAsync(<span class="s">"documento.pdf"</span>, <span class="k">await</span> response.Content.ReadAsByteArrayAsync());
+<span class="k">var</span> saldo = response.Headers.GetValues(<span class="s">"X-Balance"</span>).First();
+Console.WriteLine(<span class="s">$"PDF gerado. Saldo: R$ {saldo}"</span>);</code></pre>
+          </div>
+
+          <div id="panel-node" class="tab-panel" role="tabpanel" aria-labelledby="tab-node" v-show="tab === 'node'" v-cloak>
+<pre id="code-node" v-pre><code><span class="k">import</span> { writeFile } <span class="k">from</span> <span class="s">'node:fs/promises'</span>;
+
+<span class="k">const</span> response = <span class="k">await</span> fetch(<span class="s">'https://api.pdfservices.sistema.site/v1/html2pdf/json'</span>, {
+  <span class="p">method</span>: <span class="s">'POST'</span>,
+  <span class="p">headers</span>: {
+    <span class="s">'X-Api-Key'</span>: process.env.PDFSERVICES_API_KEY,
+    <span class="s">'Content-Type'</span>: <span class="s">'application/json'</span>
+  },
+  <span class="p">body</span>: JSON.stringify({ <span class="p">html</span>: <span class="s">'&lt;h1&gt;Olá, PDF!&lt;/h1&gt;'</span> })
+});
+
+<span class="k">if</span> (!response.ok) {
+  <span class="k">const</span> { error, message } = <span class="k">await</span> response.json();
+  <span class="k">throw new</span> Error(<span class="s">`${error}: ${message}`</span>);
+}
+
+<span class="k">await</span> writeFile(<span class="s">'documento.pdf'</span>, Buffer.from(<span class="k">await</span> response.arrayBuffer()));
+console.log(<span class="s">'Saldo:'</span>, response.headers.get(<span class="s">'X-Balance'</span>));</code></pre>
+          </div>
+
+          <div id="panel-python" class="tab-panel" role="tabpanel" aria-labelledby="tab-python" v-show="tab === 'python'" v-cloak>
+<pre id="code-python" v-pre><code><span class="k">import</span> os
+<span class="k">import</span> requests
+
+response = requests.post(
+    <span class="s">"https://api.pdfservices.sistema.site/v1/html2pdf/json"</span>,
+    headers={<span class="s">"X-Api-Key"</span>: os.environ[<span class="s">"PDFSERVICES_API_KEY"</span>]},
+    json={<span class="s">"html"</span>: <span class="s">"&lt;h1&gt;Olá, PDF!&lt;/h1&gt;"</span>},
+    timeout=<span class="n">60</span>,
+)
+
+<span class="k">if</span> response.status_code != <span class="n">200</span>:
+    erro = response.json()
+    <span class="k">raise</span> RuntimeError(<span class="s">f"{erro['error']}: {erro['message']}"</span>)
+
+<span class="k">with</span> open(<span class="s">"documento.pdf"</span>, <span class="s">"wb"</span>) <span class="k">as</span> arquivo:
+    arquivo.write(response.content)
+
+print(<span class="s">"Saldo:"</span>, response.headers[<span class="s">"X-Balance"</span>])</code></pre>
+          </div>
+
+          <div id="panel-php" class="tab-panel" role="tabpanel" aria-labelledby="tab-php" v-show="tab === 'php'" v-cloak>
+<pre id="code-php" v-pre><code><span class="k">&lt;?php</span>
+$html = <span class="s">'&lt;h1&gt;Olá, PDF!&lt;/h1&gt;'</span>;
+
+$ch = curl_init(<span class="s">'https://api.pdfservices.sistema.site/v1/html2pdf/html'</span>);
+curl_setopt_array($ch, [
+    CURLOPT_POST           =&gt; <span class="k">true</span>,
+    CURLOPT_POSTFIELDS     =&gt; $html,
+    CURLOPT_RETURNTRANSFER =&gt; <span class="k">true</span>,
+    CURLOPT_HTTPHEADER     =&gt; [
+        <span class="s">'X-Api-Key: '</span> . getenv(<span class="s">'PDFSERVICES_API_KEY'</span>),
+        <span class="s">'Content-Type: text/html; charset=utf-8'</span>,
+    ],
+]);
+
+$body   = curl_exec($ch);
+$status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+curl_close($ch);
+
+<span class="k">if</span> ($status !== <span class="n">200</span>) {
+    $erro = json_decode($body, <span class="k">true</span>);
+    <span class="k">throw new</span> RuntimeException($erro[<span class="s">'error'</span>] . <span class="s">': '</span> . $erro[<span class="s">'message'</span>]);
+}
+
+file_put_contents(<span class="s">'documento.pdf'</span>, $body);</code></pre>
+          </div>
+
+          <div class="tab-foot">
+            <span>Chave na variável de ambiente PDFSERVICES_API_KEY</span>
+            <button type="button" class="copy-btn" :class="{ 'is-copied': copied === tab }" @click="copy(tab)" v-cloak>
+              <svg class="i i-sm" aria-hidden="true"><use href="#i-copy"/></svg>{{ copied === tab ? 'Copiado!' : 'Copiar' }}
+            </button>
+            <span class="sr-only" aria-live="polite" v-cloak>{{ copied ? 'Código copiado para a área de transferência.' : '' }}</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="preco" class="section" aria-labelledby="preco-title">
+      <div class="container">
+        <div class="section-head center">
+          <span class="kicker">// preço</span>
+          <h2 id="preco-title">Pague só pelo que converter</h2>
+          <p>Sem mensalidade, sem plano mínimo, sem fidelidade. Créditos pré-pagos em reais, debitados a cada conversão bem-sucedida.</p>
+        </div>
+        <div class="pricing-grid">
+          <div class="card price-card">
+            <span class="badge">Pague por uso · html2pdf</span>
+            <p class="price"><strong v-cloak>{{ priceLabel }}</strong><span>por conversão bem-sucedida</span></p>
+            <p class="price-sub">R$ 1,00 rende <strong v-cloak>{{ perReal }}</strong> PDFs.</p>
+            <ul class="check-list">
+              <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Créditos pré-pagos em R$, sem mensalidade nem fidelidade</li>
+              <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Cobrança só quando o PDF é gerado: conversões com erro não são cobradas</li>
+              <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Saldo e consumo detalhado por chave de API no painel</li>
+              <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Alterações de preço avisadas com antecedência no site</li>
+            </ul>
+            <a class="btn btn-primary btn-lg btn-block" href="cadastro/">Criar conta</a>
+            <p class="price-note">Novas contas não recebem créditos gratuitos.</p>
+          </div>
+
+          <div class="card calc-card">
+            <div>
+              <span class="kicker">// simulador</span>
+              <h3>Quanto vou gastar?</h3>
+            </div>
+            <div>
+              <label for="volume" class="muted">Conversões por mês</label>
+              <input id="volume" class="range" type="range" min="0" max="7" step="1" v-model.number="volumeIndex" :aria-valuetext="costText">
+              <div class="range-scale" aria-hidden="true"><span>1 mil</span><span>1 milhão</span></div>
+            </div>
+            <div class="calc-output" aria-live="polite">
+              <div class="calc-box"><span>Conversões</span><strong v-cloak>{{ volumeLabel }}</strong></div>
+              <div class="calc-box total"><span>Custo estimado</span><strong v-cloak>{{ costLabel }}</strong></div>
+            </div>
+            <div class="how-credits">
+              <p><strong>Como adicionar créditos:</strong> por enquanto, fale com a CODECYCLE para carregar o saldo da sua conta. A compra online de créditos chega em breve.</p>
+              <p><a class="btn btn-ghost btn-sm" :href="config.contactUrl">Falar com a CODECYCLE</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Privacy -->
+    <section id="privacidade" class="section section-alt" aria-labelledby="priv-title">
+      <div class="container">
+        <div class="card privacy-panel">
+          <span class="kicker">// privacidade por padrão</span>
+          <h2 id="priv-title">Seu documento passa por aqui. Não fica aqui.</h2>
+          <p class="lead">O HTML enviado e o PDF gerado são processados apenas em memória, durante a requisição, e <strong>nunca são armazenados nem registrados em logs</strong>. Entregue a resposta, eles deixam de existir no serviço.</p>
+
+          <div class="flow" aria-hidden="true">
+            <div class="flow-node"><span class="icon-tile cyan"><svg class="i" aria-hidden="true"><use href="#i-code"/></svg></span><div><strong>Seu sistema</strong><span>envia o HTML por HTTPS</span></div></div>
+            <div class="flow-arrow"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></div>
+            <div class="flow-node memory"><span class="icon-tile"><svg class="i" aria-hidden="true"><use href="#i-cpu"/></svg></span><div><strong>PDF Services</strong><span>converte em memória · 0 bytes em disco</span></div></div>
+            <div class="flow-arrow"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></div>
+            <div class="flow-node"><span class="icon-tile pink"><svg class="i" aria-hidden="true"><use href="#i-file"/></svg></span><div><strong>Seu sistema</strong><span>recebe o PDF na resposta</span></div></div>
+          </div>
+
+          <div class="privacy-cols">
+            <div class="privacy-col never">
+              <h3><svg class="i" aria-hidden="true" style="color: var(--danger)"><use href="#i-x"/></svg> O que nunca guardamos</h3>
+              <ul class="x-list">
+                <li><svg class="i" aria-hidden="true"><use href="#i-x"/></svg>O HTML que você envia</li>
+                <li><svg class="i" aria-hidden="true"><use href="#i-x"/></svg>O PDF que geramos</li>
+                <li><svg class="i" aria-hidden="true"><use href="#i-x"/></svg>As imagens baixadas para compor o PDF</li>
+                <li><svg class="i" aria-hidden="true"><use href="#i-x"/></svg>Qualquer trecho do conteúdo em logs ou telemetria</li>
+              </ul>
+            </div>
+            <div class="privacy-col">
+              <h3><svg class="i" aria-hidden="true" style="color: var(--success)"><use href="#i-check"/></svg> O que registramos</h3>
+              <ul class="check-list">
+                <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span>Metadados de cada transação: data/hora, capacidade, chave usada, valor cobrado, saldo, tamanhos em bytes e duração.</span></li>
+                <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span>Registros de acesso (IP e data/hora), guardados por 6 meses por exigência do Marco Civil da Internet.</span></li>
+                <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span>Dados de cadastro da conta: nome, razão social, CNPJ, e-mail e o hash da senha.</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="privacy-foot">
+            <p>Consequência prática: como não guardamos o conteúdo, não conseguimos recuperar um documento já convertido. Mantenha suas próprias cópias.</p>
+            <a class="btn btn-ghost" href="privacidade/">Ler a Política de Privacidade</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features and limits -->
+    <section id="recursos" class="section" aria-labelledby="recursos-title">
+      <div class="container">
+        <div class="section-head">
+          <span class="kicker">// o que suporta</span>
+          <h2 id="recursos-title">HTML e CSS de verdade, com o motor iText pdfHTML</h2>
+          <p>Escreva o documento com as tecnologias que você já conhece e controle a paginação com CSS.</p>
+        </div>
+        <div class="feature-grid">
+          <article class="card feature">
+            <span class="icon-tile"><svg class="i" aria-hidden="true"><use href="#i-code"/></svg></span>
+            <h3>HTML + CSS</h3>
+            <p>O pdfHTML suporta boa parte do CSS 2.1 e do CSS 3: tipografia, cores, bordas, margens, fundos, posicionamento e muito mais.</p>
+          </article>
+          <article class="card feature">
+            <span class="icon-tile cyan"><svg class="i" aria-hidden="true"><use href="#i-layout"/></svg></span>
+            <h3>@page e paginação</h3>
+            <p>Defina tamanho, margens e orientação da página com <code>@page</code> e controle quebras com <code>page-break-before</code>, <code>-after</code> e <code>-inside</code>.</p>
+          </article>
+          <article class="card feature">
+            <span class="icon-tile pink"><svg class="i" aria-hidden="true"><use href="#i-table"/></svg></span>
+            <h3>Tabelas</h3>
+            <p>Tabelas longas quebram entre páginas, ideais para relatórios, extratos, notas e faturas.</p>
+          </article>
+          <article class="card feature">
+            <span class="icon-tile"><svg class="i" aria-hidden="true"><use href="#i-type"/></svg></span>
+            <h3>Fontes padrão embutidas</h3>
+            <p>As fontes padrão do mecanismo estão prontas para uso e cobrem acentos e símbolos comuns. Fontes próprias podem ser embutidas via <code>@font-face</code> com <code>data:</code> URI. Fontes referenciadas por URL (como Google Fonts) não são baixadas.</p>
+          </article>
+          <article class="card feature">
+            <span class="icon-tile cyan"><svg class="i" aria-hidden="true"><use href="#i-image"/></svg></span>
+            <h3>Imagens</h3>
+            <p>Embutidas no HTML como <code>data:</code> URI ou por URL <strong>https</strong> pública, nos formatos JPG e PNG.</p>
+          </article>
+          <article class="card feature">
+            <span class="icon-tile pink"><svg class="i" aria-hidden="true"><use href="#i-shield"/></svg></span>
+            <h3>Seguro por padrão</h3>
+            <p>JavaScript não é executado e endereços internos ou privados são bloqueados no download de imagens.</p>
+          </article>
+        </div>
+
+        <div class="limits">
+          <div>
+            <h3>Limites e o que não é suportado</h3>
+            <ul class="x-list">
+              <li><svg class="i" aria-hidden="true"><use href="#i-x"/></svg><span>Requisições de no máximo <strong>1 MB</strong> (HTML e imagens embutidas).</span></li>
+              <li><svg class="i" aria-hidden="true"><use href="#i-x"/></svg><span>JavaScript não é executado.</span></li>
+              <li><svg class="i" aria-hidden="true"><use href="#i-x"/></svg><span>CSS, fontes e scripts externos por URL não são baixados.</span></li>
+              <li><svg class="i" aria-hidden="true"><use href="#i-x"/></svg><span>Imagens por URL: só https, só JPG/PNG, só endereços públicos, com limites de tamanho e de tempo.</span></li>
+            </ul>
+          </div>
+          <div class="tip">
+            <p class="mini-title">Dica para resultados previsíveis</p>
+            <p>Coloque o CSS numa tag <code>&lt;style&gt;</code> no próprio documento, embuta imagens pequenas como <code>data:</code> URI e monte o HTML final no seu servidor, com o template engine que você já usa, antes de enviar.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Open source -->
+    <section id="codigo-aberto" class="section section-alt oss" aria-labelledby="oss-title">
+      <div class="container split even">
+        <div>
+          <span class="kicker">// código aberto</span>
+          <h2 id="oss-title">100% código aberto, sob a GNU AGPL v3</h2>
+          <p class="lead">O código que processa os seus documentos está publicado no GitHub. Você não precisa confiar só na nossa palavra: pode ler, auditar e verificar como o PDF Services funciona.</p>
+          <ul class="oss-points">
+            <li>
+              <span class="icon-tile"><svg class="i" aria-hidden="true"><use href="#i-eye"/></svg></span>
+              <div><h3>Aberto e auditável</h3><p>Veja como o HTML é tratado, o que é registrado e como a cobrança funciona. O código-fonte do serviço é público.</p></div>
+            </li>
+            <li>
+              <span class="icon-tile cyan"><svg class="i" aria-hidden="true"><use href="#i-file"/></svg></span>
+              <div><h3>Construído sobre o iText</h3><p>A conversão usa a biblioteca iText (pdfHTML), também licenciada sob a AGPL.</p></div>
+            </li>
+            <li>
+              <span class="icon-tile pink"><svg class="i" aria-hidden="true"><use href="#i-info"/></svg></span>
+              <div><h3>Identificado em cada PDF</h3><p>Os PDFs gerados trazem no metadado “Producer” o texto <code>CodeCycle AGPL PDF Services (https://pdfservices.sistema.site)</code>, seguido da identificação da versão AGPL do iText.</p></div>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="card repo-card">
+            <div class="repo-head">
+              <svg class="i i-lg" aria-hidden="true"><use href="#i-github"/></svg>
+              <a :href="config.sourceCodeUrl" target="_blank" rel="noopener">Leitonez/pdfservices</a>
+            </div>
+            <p>Código-fonte completo do serviço: API de conversão, painel do cliente e este site.</p>
+            <div class="repo-meta">
+              <span class="badge">AGPL-3.0</span>
+              <span class="badge badge-accent">iText pdfHTML</span>
+              <span class="badge badge-muted">Público</span>
+            </div>
+            <div class="btn-row">
+              <a class="btn btn-primary" :href="config.sourceCodeUrl" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-github"/></svg> Ver código no GitHub</a>
+              <a class="btn btn-ghost" href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank" rel="noopener">Ler a licença</a>
+            </div>
+          </div>
+
+          <figure class="code window" style="margin: 0" aria-labelledby="producer-caption">
+            <figcaption id="producer-caption" class="sr-only">Exemplo dos metadados de um PDF gerado pelo serviço.</figcaption>
+            <div class="code-header">
+              <span class="code-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span class="code-title">pdfinfo documento.pdf</span>
+              <span aria-hidden="true"></span>
+            </div>
+<pre v-pre><code><span class="prompt-sign">$</span> pdfinfo documento.pdf
+<span class="p">Producer</span>:  CodeCycle AGPL PDF Services (https://pdfservices.sistema.site)
+           <span class="c"># ...seguido da identificação da versão AGPL do iText</span>
+<span class="p">Pages</span>:     <span class="n">1</span></code></pre>
+          </figure>
+
+          <div class="legal-note" role="note">
+            <svg class="i" aria-hidden="true"><use href="#i-scale"/></svg>
+            <p><strong>Não é aconselhamento jurídico.</strong> A AGPL tem implicações próprias; recomendamos que sua empresa as avalie com a assessoria jurídica. A <a href="termos/#codigo-aberto-e-propriedade-intelectual">seção 10 dos Termos de Uso</a> trata da relação entre a licença e o serviço hospedado.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="section" aria-labelledby="faq-title">
+      <div class="container">
+        <div class="section-head center">
+          <span class="kicker">// perguntas frequentes</span>
+          <h2 id="faq-title">Perguntas frequentes</h2>
+        </div>
+        <div class="faq">
+          <details>
+            <summary>Quanto custa usar o PDF Services?</summary>
+            <div class="answer">
+              <p><strong v-cloak>{{ priceLabel }}</strong> por conversão bem-sucedida, debitado de créditos pré-pagos em reais. Não há mensalidade, plano mínimo nem créditos gratuitos para novas contas. Conversões que falham, como um HTML que não pode ser convertido, não são cobradas.</p>
+            </div>
+          </details>
+          <details>
+            <summary>Como adiciono créditos à minha conta?</summary>
+            <div class="answer">
+              <p>Nesta fase, os créditos são adicionados pela CODECYCLE: <a :href="config.contactUrl">fale conosco</a> informando a sua conta. A compra online de créditos estará disponível em breve. Saldo e consumo ficam visíveis no painel. O saldo serve só para pagar conversões e não é resgatável em dinheiro.</p>
+            </div>
+          </details>
+          <details>
+            <summary>Qual o tamanho máximo de um documento?</summary>
+            <div class="answer">
+              <p>Cada requisição pode ter até <strong>1 MB</strong>, incluindo o HTML e as imagens embutidas como <code>data:</code> URI. Acima disso, a API responde <code>413 payload_too_large</code>. Imagens referenciadas por URL são baixadas pelo serviço e têm limites próprios de tamanho e de tempo.</p>
+            </div>
+          </details>
+          <details>
+            <summary>Como incluo imagens no PDF?</summary>
+            <div class="answer">
+              <p>De duas formas: embutidas no HTML como <code>data:</code> URI, ou referenciadas por URL <strong>https</strong> pública, nos formatos <strong>JPG ou PNG</strong>. Endereços internos ou privados são bloqueados, e imagens que não atendam a essas condições podem não aparecer no PDF.</p>
+            </div>
+          </details>
+          <details>
+            <summary>Posso usar CSS externo e minhas próprias fontes?</summary>
+            <div class="answer">
+              <p>Folhas de estilo, fontes e scripts referenciados por URL não são baixados. Coloque o CSS numa tag <code>&lt;style&gt;</code> ou em atributos <code>style</code>. Fontes por URL (como Google Fonts) são ignoradas e o texto usa as fontes padrão do mecanismo, que já cobrem acentos e símbolos comuns. Para usar uma fonte própria, embuta-a com <code>@font-face</code> e <code>src: url(data:font/ttf;base64,...)</code>. O arquivo da fonte conta no limite de 1 MB da requisição.</p>
+            </div>
+          </details>
+          <details>
+            <summary>O JavaScript da página é executado?</summary>
+            <div class="answer">
+              <p>Não. O conteúdo gerado por JavaScript (gráficos, tabelas montadas no navegador) não aparece no PDF. Monte o HTML final no seu servidor antes de enviar; para gráficos, envie-os como imagem PNG.</p>
+            </div>
+          </details>
+          <details>
+            <summary>Vocês guardam o HTML ou o PDF?</summary>
+            <div class="answer">
+              <p>Não. Os dois são processados só em memória e nunca são armazenados nem registrados em logs. Guardamos apenas metadados da transação (data/hora, capacidade, chave usada, valor, saldo, tamanhos em bytes e duração) e registros de acesso (IP e data/hora) por 6 meses, como exige o Marco Civil da Internet. Por isso, não conseguimos recuperar um documento já convertido. Detalhes na <a href="privacidade/">Política de Privacidade</a>.</p>
+            </div>
+          </details>
+          <details>
+            <summary>O que a licença AGPL significa para a minha empresa?</summary>
+            <div class="answer">
+              <p>O código do PDF Services e a biblioteca iText são licenciados sob a GNU AGPL v3. A licença rege o código-fonte do software (uso, modificação e redistribuição), e a contratação do serviço hospedado é regida pelos <a href="termos/">Termos de Uso</a>. Os PDFs gerados trazem essa identificação no metadado “Producer”. Não prestamos aconselhamento jurídico: recomendamos que sua empresa avalie as implicações da AGPL com a assessoria jurídica.</p>
+            </div>
+          </details>
+          <details>
+            <summary>Como excluo minha conta?</summary>
+            <div class="answer">
+              <p>Pelo painel, a qualquer momento, confirmando a senha. A exclusão é irreversível: nome, e-mail e hash da senha são apagados e todas as chaves de API são revogadas. O saldo remanescente é perdido. Razão social, CNPJ e histórico de transações são mantidos de forma anonimizada pelo prazo exigido por lei, conforme o art. 16 da LGPD.</p>
+            </div>
+          </details>
+          <details>
+            <summary>Como falo com o suporte?</summary>
+            <div class="answer">
+              <p>Fale com a CODECYCLE pelo e-mail <a :href="config.contactUrl">{{ config.contactEmail }}</a>. Encontrou um bug ou quer sugerir uma melhoria no código? Abra uma issue no <a :href="config.sourceCodeUrl" target="_blank" rel="noopener">repositório no GitHub</a>.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="section" aria-labelledby="cta-title" style="padding-top: 0">
+      <div class="container">
+        <div class="cta-band">
+          <span class="kicker">$ pdfservices --init</span>
+          <h2 id="cta-title">Pronto para gerar seu primeiro PDF?</h2>
+          <p>Crie a conta da sua empresa, gere uma chave de API e converta HTML em PDF com uma única requisição.</p>
+          <div class="cta-row">
+            <a class="btn btn-primary btn-lg" href="cadastro/">Criar conta <svg class="i i-sm" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            <a class="btn btn-ghost btn-lg" :href="loginUrl">Já tenho conta · Entrar</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="site-footer" class="site-footer" data-base="">
+    <div class="container">
+      <p class="muted"><a href="termos/">Termos de Uso</a> · <a href="privacidade/">Política de Privacidade</a> · <a href="https://github.com/Leitonez/pdfservices">Código-fonte (GitHub)</a> · © CODECYCLE · Software livre sob AGPL v3</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@3.5.42/dist/vue.global.prod.js"></script>
+  <script type="module" src="assets/js/pages/home.js"></script>
+</body>
+</html>

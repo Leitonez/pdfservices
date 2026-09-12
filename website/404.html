@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Página não encontrada · PDF Services</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#0b1120">
+  <!-- 404.html can be served from any path: every URL here is root-relative. -->
+  <link rel="icon" type="image/png" href="/assets/img/logo-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="/assets/css/theme.css">
+  <link rel="stylesheet" href="/assets/css/site.css">
+</head>
+<body class="site">
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <header id="site-header" class="site-header" data-base="/"></header>
+
+  <main id="conteudo" class="notfound has-glow" tabindex="-1">
+    <div class="page-glow grid-bg" aria-hidden="true"></div>
+    <div class="container notfound-inner">
+      <p class="big grad" aria-hidden="true">404</p>
+      <h1>Página não encontrada</h1>
+      <p class="lead" style="margin: 0 auto">O endereço que você acessou não existe ou foi movido.</p>
+      <div class="code window">
+        <div class="code-header">
+          <span class="code-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="code-title">bash</span>
+          <span aria-hidden="true"></span>
+        </div>
+<pre><code><span class="prompt-sign">$</span> curl -I https://pdfservices.sistema.site<span id="nf-path">/pagina</span>
+<span style="color: #fda4af">HTTP/1.1 404 Not Found</span>
+<span class="c"># Nenhum PDF foi gerado e nada foi cobrado.</span></code></pre>
+      </div>
+      <div class="cta-row">
+        <a class="btn btn-primary btn-lg" href="/">Voltar ao início</a>
+        <a class="btn btn-ghost btn-lg" href="/cadastro/">Criar conta</a>
+      </div>
+    </div>
+  </main>
+
+  <footer id="site-footer" class="site-footer" data-base="/">
+    <div class="container">
+      <p class="muted"><a href="/termos/">Termos de Uso</a> · <a href="/privacidade/">Política de Privacidade</a> · © CODECYCLE · Software livre sob AGPL v3</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@3.5.42/dist/vue.global.prod.js"></script>
+  <script type="module" src="/assets/js/pages/static.js"></script>
+</body>
+</html>

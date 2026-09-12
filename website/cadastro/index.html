@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Criar conta · PDF Services</title>
+  <meta name="description" content="Crie a conta da sua empresa no PDF Services: API de HTML para PDF com iText, pague por uso, sem armazenar seus documentos e com código aberto (AGPL v3).">
+  <link rel="canonical" href="https://pdfservices.sistema.site/cadastro/">
+  <meta name="theme-color" content="#0b1120">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="PDF Services · CODECYCLE">
+  <meta property="og:title" content="Criar conta · PDF Services">
+  <meta property="og:description" content="Cadastre sua empresa e comece a converter HTML em PDF pagando só pelo que usar.">
+  <meta property="og:url" content="https://pdfservices.sistema.site/cadastro/">
+  <meta property="og:image" content="https://pdfservices.sistema.site/assets/img/logo-icon.png">
+  <link rel="icon" type="image/png" href="../assets/img/logo-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="../assets/css/theme.css">
+  <link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body class="site">
+  <svg class="sprite" aria-hidden="true" focusable="false">
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-eye-off" viewBox="0 0 24 24"><path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49"/><path d="M14.084 14.158a3 3 0 0 1-4.242-4.242"/><path d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143"/><path d="m2 2 20 20"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-github" viewBox="0 0 24 24"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+  </svg>
+
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <header id="site-header" class="site-header" data-base="../"></header>
+
+  <main id="conteudo" class="signup-page has-glow" tabindex="-1" v-cloak>
+    <div class="page-glow grid-bg" aria-hidden="true"></div>
+    <div class="container signup-grid">
+      <div>
+        <div class="signup-intro" v-if="!done">
+          <span class="prompt-pill"><span class="dollar">$</span> pdfservices signup</span>
+          <h1>Crie a conta da sua empresa</h1>
+          <p>Cadastro exclusivo para empresas (CNPJ). Depois, confirme o e-mail e entre no painel para gerar sua chave de API.</p>
+        </div>
+
+        <form v-if="!done" class="card form-card" novalidate @submit.prevent="submit">
+          <div v-if="alert" class="alert alert-error" role="alert">
+            <svg class="i" aria-hidden="true"><use href="#i-alert"/></svg>
+            <p>{{ alert }}</p>
+          </div>
+
+          <p class="form-section-title">Responsável</p>
+          <div class="field" :class="{ 'has-error': errors.name }">
+            <label for="f-name">Nome completo</label>
+            <input id="f-name" v-model="form.name" type="text" autocomplete="name" maxlength="120" required
+                   :aria-invalid="errors.name ? 'true' : 'false'" :aria-describedby="errors.name ? 'e-name' : null"
+                   @input="revalidate('name')" @blur="blurValidate('name')">
+            <span v-if="errors.name" id="e-name" class="field-error">{{ errors.name }}</span>
+          </div>
+
+          <p class="form-section-title">Empresa</p>
+          <div class="form-row">
+            <div class="field" :class="{ 'has-error': errors.companyName }">
+              <label for="f-company">Razão social</label>
+              <input id="f-company" v-model="form.companyName" type="text" autocomplete="organization" maxlength="200" required
+                     :aria-invalid="errors.companyName ? 'true' : 'false'" :aria-describedby="errors.companyName ? 'e-company' : null"
+                     @input="revalidate('companyName')" @blur="blurValidate('companyName')">
+              <span v-if="errors.companyName" id="e-company" class="field-error">{{ errors.companyName }}</span>
+            </div>
+            <div class="field" :class="{ 'has-error': errors.cnpj }">
+              <div class="label-row">
+                <label for="f-cnpj">CNPJ</label>
+                <span class="field-hint">numérico ou alfanumérico</span>
+              </div>
+              <input id="f-cnpj" class="mono-input" :value="form.cnpj" type="text" autocomplete="off" autocapitalize="characters"
+                     spellcheck="false" maxlength="18" placeholder="00.000.000/0000-00" required
+                     :aria-invalid="errors.cnpj ? 'true' : 'false'" :aria-describedby="errors.cnpj ? 'e-cnpj' : null"
+                     @input="onCnpjInput" @blur="blurValidate('cnpj')">
+              <span v-if="errors.cnpj" id="e-cnpj" class="field-error">{{ errors.cnpj }}</span>
+            </div>
+          </div>
+
+          <p class="form-section-title">Acesso</p>
+          <div class="field" :class="{ 'has-error': errors.email }">
+            <label for="f-email">E-mail</label>
+            <input id="f-email" v-model="form.email" type="email" autocomplete="email" spellcheck="false" maxlength="254"
+                   placeholder="voce@empresa.com.br" required
+                   :aria-invalid="errors.email ? 'true' : 'false'" :aria-describedby="errors.email ? 'e-email h-email' : 'h-email'"
+                   @input="revalidate('email')" @blur="blurValidate('email')">
+            <span v-if="errors.email" id="e-email" class="field-error">{{ errors.email }}</span>
+            <span id="h-email" class="field-hint">Enviaremos um link de confirmação para este endereço.</span>
+          </div>
+
+          <div class="form-row">
+            <div class="field" :class="{ 'has-error': errors.password }">
+              <label for="f-password">Senha</label>
+              <div class="input-group">
+                <input id="f-password" v-model="form.password" :type="showPassword ? 'text' : 'password'" autocomplete="new-password"
+                       maxlength="128" required
+                       :aria-invalid="errors.password ? 'true' : 'false'" :aria-describedby="errors.password ? 'e-password h-password' : 'h-password'"
+                       @input="revalidate('password')" @blur="blurValidate('password')">
+                <button type="button" class="input-toggle" :aria-pressed="showPassword ? 'true' : 'false'"
+                        aria-controls="f-password f-confirm" @click="showPassword = !showPassword">
+                  <svg class="i" aria-hidden="true"><use :href="showPassword ? '#i-eye-off' : '#i-eye'"/></svg>
+                  <span class="sr-only">{{ showPassword ? 'Ocultar senha' : 'Mostrar senha' }}</span>
+                </button>
+              </div>
+              <div class="strength" :class="'lvl-' + strength" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+              <span v-if="errors.password" id="e-password" class="field-error">{{ errors.password }}</span>
+              <span id="h-password" class="field-hint">Mínimo de 10 caracteres.<template v-if="strength"> Força: {{ strengthLabel }}.</template></span>
+            </div>
+            <div class="field" :class="{ 'has-error': errors.confirmPassword }">
+              <label for="f-confirm">Confirmar senha</label>
+              <input id="f-confirm" v-model="form.confirmPassword" :type="showPassword ? 'text' : 'password'" autocomplete="new-password"
+                     maxlength="128" required
+                     :aria-invalid="errors.confirmPassword ? 'true' : 'false'" :aria-describedby="errors.confirmPassword ? 'e-confirm' : null"
+                     @input="revalidate('confirmPassword')" @blur="blurValidate('confirmPassword')">
+              <span v-if="errors.confirmPassword" id="e-confirm" class="field-error">{{ errors.confirmPassword }}</span>
+            </div>
+          </div>
+
+          <div class="terms-box" :class="{ 'has-error': errors.acceptTerms }">
+            <label class="checkbox" for="f-terms">
+              <input id="f-terms" v-model="form.acceptTerms" type="checkbox" required
+                     :aria-invalid="errors.acceptTerms ? 'true' : 'false'" :aria-describedby="errors.acceptTerms ? 'e-terms' : null"
+                     @change="revalidate('acceptTerms')">
+              <span>Li e aceito os <a href="../termos/" target="_blank" rel="noopener">Termos de Uso<span class="sr-only"> (abre em nova aba)</span></a> e a <a href="../privacidade/" target="_blank" rel="noopener">Política de Privacidade<span class="sr-only"> (abre em nova aba)</span></a>.</span>
+            </label>
+            <span v-if="errors.acceptTerms" id="e-terms" class="field-error">{{ errors.acceptTerms }}</span>
+          </div>
+
+          <div class="turnstile-slot">
+            <turnstile-widget ref="captcha" action="signup" @token="token = $event" @expired="token = ''" @error="token = ''"></turnstile-widget>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg btn-block" :disabled="!canSubmit" :aria-busy="submitting ? 'true' : 'false'">
+            <span v-if="submitting" class="spinner" aria-hidden="true"></span>
+            {{ submitting ? 'Criando conta…' : 'Criar conta' }}
+          </button>
+          <p v-if="!token && !submitting" class="field-hint text-center" style="margin: 10px 0 0">Conclua a verificação anti-robô para continuar.</p>
+          <p class="form-foot">Já tem conta? <a :href="loginUrl">Entrar</a></p>
+        </form>
+
+        <section v-else class="card success-card" aria-labelledby="success-title">
+          <span class="success-icon"><svg class="i i-lg" aria-hidden="true"><use href="#i-mail"/></svg></span>
+          <h2 id="success-title" ref="successTitle" tabindex="-1">Confira seu e-mail</h2>
+          <p>Enviamos um link de confirmação para <span class="sent-to">{{ sentTo }}</span>.</p>
+          <ol class="next-steps">
+            <li>Abra o e-mail do PDF Services (remetente <strong>autenticacao@mail.pdfservices.sistema.site</strong>) e clique no link. Ele vale por 48 horas e pode ser usado uma única vez.</li>
+            <li>Não encontrou? Procure também nas pastas de spam, lixo eletrônico e promoções.</li>
+            <li>Com o e-mail confirmado, entre no painel e gere sua chave de API.</li>
+          </ol>
+          <div class="btn-row">
+            <a class="btn btn-primary" :href="loginUrl">Ir para o login <svg class="i i-sm" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            <button type="button" class="btn btn-link" @click="useAnotherEmail">Cadastrar com outro e-mail</button>
+          </div>
+
+          <div class="resend-box">
+            <h3>Não recebeu o e-mail?</h3>
+            <p>Aguarde alguns minutos. Se ainda assim não chegar, peça um novo link.</p>
+            <div v-if="resendMessage" class="alert alert-success" role="status">
+              <svg class="i" aria-hidden="true"><use href="#i-check"/></svg>
+              <p>{{ resendMessage }}</p>
+            </div>
+            <div v-if="resendError" class="alert alert-error" role="alert">
+              <svg class="i" aria-hidden="true"><use href="#i-alert"/></svg>
+              <p>{{ resendError }}</p>
+            </div>
+            <div class="turnstile-slot">
+              <turnstile-widget ref="resendCaptcha" action="resend" @token="resendToken = $event" @expired="resendToken = ''" @error="resendToken = ''"></turnstile-widget>
+            </div>
+            <button type="button" class="btn btn-ghost" :disabled="!canResend" :aria-busy="resending ? 'true' : 'false'" @click="resend">
+              <span v-if="resending" class="spinner" aria-hidden="true"></span>
+              {{ resendLabel }}
+            </button>
+          </div>
+        </section>
+      </div>
+
+      <aside class="signup-aside" aria-label="Resumo do serviço">
+        <div class="card">
+          <span class="kicker">// o que você recebe</span>
+          <h2>API de HTML para PDF, sem complicação</h2>
+          <p class="aside-price"><strong v-cloak>{{ priceLabel }}</strong><span>por conversão bem-sucedida</span></p>
+          <ul class="check-list">
+            <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Créditos pré-pagos em R$, sem mensalidade</li>
+            <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Conversões com erro não são cobradas</li>
+            <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Chaves de API e consumo detalhado no painel</li>
+            <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Motor iText pdfHTML, com <code>@page</code>, tabelas e imagens</li>
+          </ul>
+          <p class="price-note">Novas contas não recebem créditos gratuitos. Para adicionar saldo, <a :href="config.contactUrl">fale com a CODECYCLE</a>.</p>
+        </div>
+        <div class="card mini-card">
+          <span class="icon-tile cyan"><svg class="i" aria-hidden="true"><use href="#i-shield"/></svg></span>
+          <div>
+            <h3>Seus documentos não ficam aqui</h3>
+            <p>O HTML e o PDF são processados só em memória e nunca são armazenados nem registrados em logs. <a href="../privacidade/">Política de Privacidade</a></p>
+          </div>
+        </div>
+        <div class="card mini-card">
+          <span class="icon-tile pink"><svg class="i" aria-hidden="true"><use href="#i-github"/></svg></span>
+          <div>
+            <h3>Código aberto (AGPL v3)</h3>
+            <p>O código do serviço é público e auditável. Recomendamos avaliar as implicações da AGPL com sua assessoria jurídica. <a :href="config.sourceCodeUrl" target="_blank" rel="noopener">Ver no GitHub</a></p>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+  <noscript>
+    <div class="container"><p class="alert alert-warning">Ative o JavaScript no navegador para criar sua conta.</p></div>
+  </noscript>
+
+  <footer id="site-footer" class="site-footer" data-base="../">
+    <div class="container">
+      <p class="muted"><a href="../termos/">Termos de Uso</a> · <a href="../privacidade/">Política de Privacidade</a> · <a href="https://github.com/Leitonez/pdfservices">Código-fonte (GitHub)</a> · © CODECYCLE · Software livre sob AGPL v3</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@3.5.42/dist/vue.global.prod.js"></script>
+  <script type="module" src="../assets/js/pages/signup.js"></script>
+</body>
+</html>

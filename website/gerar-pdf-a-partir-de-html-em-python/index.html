@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gerar PDF a partir de HTML em Python | PDF Services</title>
+  <meta name="description" content="Como gerar PDF a partir de HTML em Python: compare WeasyPrint e Playwright e veja o código com requests, FastAPI e Django, via API com iText (AGPL).">
+  <meta name="keywords" content="gerar pdf a partir de html python, html para pdf python, converter html em pdf python, weasyprint, fastapi pdf, django pdf, iText, iText pdfHTML, AGPL, Playwright">
+  <link rel="canonical" href="https://pdfservices.sistema.site/gerar-pdf-a-partir-de-html-em-python">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="theme-color" content="#0b1120">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="PDF Services · CODECYCLE">
+  <meta property="og:title" content="Gerar PDF a partir de HTML em Python | PDF Services">
+  <meta property="og:description" content="Como gerar PDF a partir de HTML em Python: compare WeasyPrint e Playwright e veja o código com requests, FastAPI e Django, via API com iText (AGPL).">
+  <meta property="og:url" content="https://pdfservices.sistema.site/gerar-pdf-a-partir-de-html-em-python">
+  <meta property="og:image" content="https://pdfservices.sistema.site/assets/img/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="article:published_time" content="2026-09-12">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/png" href="../assets/img/logo-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="../assets/css/theme.css">
+  <link rel="stylesheet" href="../assets/css/site.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "TechArticle",
+      "headline": "Gerar PDF a partir de HTML em Python",
+      "description": "Como gerar PDF a partir de HTML em Python: compare WeasyPrint e Playwright e veja o código com requests, FastAPI e Django, via API com iText (AGPL).",
+      "inLanguage": "pt-BR",
+      "datePublished": "2026-09-12",
+      "dateModified": "2026-09-12",
+      "image": "https://pdfservices.sistema.site/assets/img/og-image.png",
+      "author": {
+        "@type": "Organization",
+        "name": "CODECYCLE",
+        "url": "https://codecycle.com.br"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "CODECYCLE",
+        "url": "https://codecycle.com.br",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://pdfservices.sistema.site/assets/img/logo-icon.png"
+        }
+      },
+      "mainEntityOfPage": "https://pdfservices.sistema.site/gerar-pdf-a-partir-de-html-em-python",
+      "proficiencyLevel": "Beginner",
+      "keywords": "gerar pdf a partir de html python, html para pdf python, converter html em pdf python, weasyprint, fastapi pdf, django pdf, iText, iText pdfHTML, AGPL, Playwright"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Início",
+          "item": "https://pdfservices.sistema.site/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Guias",
+          "item": "https://pdfservices.sistema.site/#guias"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "HTML para PDF em Python",
+          "item": "https://pdfservices.sistema.site/gerar-pdf-a-partir-de-html-em-python"
+        }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+<body class="site">
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <header id="site-header" class="site-header" data-base="../">
+    <div class="container bar">
+      <a class="brand" href="../"><img src="../assets/img/logo-code.png" alt="CODECYCLE" width="107" height="24"><span class="brand-divider" aria-hidden="true"></span><span class="brand-product">PDF <span>Services</span></span></a>
+      <nav class="site-nav" aria-label="Principal"><a href="../#como-funciona">Como funciona</a><a href="../#preco">Preço</a><a href="../#privacidade">Privacidade</a><a href="../#codigo-aberto">Código aberto</a><a href="../#faq">FAQ</a></nav>
+      <div class="header-actions"><a class="btn btn-ghost desktop-only" href="https://my.pdfservices.sistema.site/login">Entrar</a><a class="btn btn-primary desktop-only" href="../cadastro">Criar conta</a></div>
+    </div>
+  </header>
+
+  <main id="conteudo" class="legal-page has-glow" tabindex="-1">
+    <div class="page-glow grid-bg" aria-hidden="true"></div>
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Trilha de navegação">
+        <ol><li><a href="../">Início</a></li><li><a href="../#guias">Guias</a></li><li aria-current="page">HTML para PDF em Python</li></ol>
+      </nav>
+      <article class="legal guide" aria-labelledby="doc-title">
+        <h1 id="doc-title">Gerar PDF a partir de HTML em Python</h1>
+        <p>Guia · atualizado em 12/09/2026 · 8 min de leitura</p>
+<p class="lead">Quer <strong>gerar PDF a partir de HTML em Python</strong>? Relatórios, notas, certificados e contratos ficam muito mais fáceis de manter quando o layout é um template HTML com CSS. Este guia compara as bibliotecas mais usadas e mostra o código completo com <code>requests</code>, FastAPI e Django, usando a API do PDF Services.</p>
+<nav aria-label="Sumário">
+  <ol>
+    <li><a href="#opcoes">As opções em Python</a></li>
+    <li><a href="#passo-a-passo">Passo a passo com requests</a></li>
+    <li><a href="#fastapi">Exemplo com FastAPI</a></li>
+    <li><a href="#django">Exemplo com Django</a></li>
+    <li><a href="#css-para-pdf">CSS para PDF</a></li>
+    <li><a href="#erros">Tratamento de erros</a></li>
+    <li><a href="#custos-e-privacidade">Custos e privacidade</a></li>
+  </ol>
+</nav>
+
+<section id="opcoes">
+  <h2>As opções em Python</h2>
+  <table>
+    <thead><tr><th>Opção</th><th>Como funciona</th><th>Pontos de atenção</th></tr></thead>
+    <tbody>
+      <tr><td>WeasyPrint</td><td>Renderiza HTML e CSS de impressão em Python, sem navegador.</td><td>Ótimo suporte a CSS de impressão, mas depende de bibliotecas nativas (Pango), que complicam a instalação no Windows e em imagens mínimas.</td></tr>
+      <tr><td>xhtml2pdf</td><td>Conversor em Python puro.</td><td>Suporte limitado a CSS moderno: layouts mais elaborados costumam precisar de ajustes.</td></tr>
+      <tr><td>pdfkit (wkhtmltopdf)</td><td>Wrapper do executável wkhtmltopdf.</td><td>O wkhtmltopdf foi arquivado em 2023 e usa um WebKit antigo. Evite em projetos novos.</td></tr>
+      <tr><td>Playwright</td><td>Controla um Chromium headless e imprime a página.</td><td>Precisa instalar e manter o navegador; custo alto de memória em servidores e funções.</td></tr>
+      <tr><td>API HTTP (PDF Services)</td><td>Você envia o HTML e recebe o PDF.</td><td>Depende de rede e é cobrado por uso, sem dependências nativas no servidor.</td></tr>
+    </tbody>
+  </table>
+  <p>O PDF Services converte com o <strong>iText pdfHTML</strong>, um motor maduro de conversão de HTML e CSS para PDF, e todo o código do serviço é aberto sob a licença <strong>AGPL v3</strong>. Você não precisa instalar o iText, Java ou .NET: a conversão acontece na API.</p>
+  <p>Se você já usa WeasyPrint e ele atende, ótimo. A API faz mais sentido quando você não quer instalar bibliotecas do sistema, quando publica em ambientes serverless (AWS Lambda, Cloud Functions) ou quando prefere não ocupar o seu servidor com a renderização.</p>
+</section>
+
+<section id="passo-a-passo">
+  <h2>Passo a passo com requests</h2>
+  <h3>1. Crie a conta e a chave</h3>
+  <p><a href="../cadastro">Cadastre a empresa</a>, confirme o e-mail e crie uma chave em <em>Chaves de API</em> no painel. Guarde-a em variável de ambiente ou em um gerenciador de segredos, nunca no repositório.</p>
+  <h3>2. Envie o HTML e salve o PDF</h3>
+  <p>Instale o <code>requests</code> (<code>pip install requests</code>) e rode:</p>
+<div class="code">
+  <div class="code-header"><span class="code-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>gerar_pdf.py</span></div>
+<pre><code>import os
+
+import requests
+
+api_key = os.environ[&quot;PDFSERVICES_API_KEY&quot;]
+
+html = &quot;&quot;&quot;&lt;!doctype html&gt;
+&lt;html lang=&quot;pt-BR&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;style&gt;
+    @page { size: A4; margin: 2cm; }
+    body { font-family: sans-serif; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;&lt;h1&gt;Olá, PDF!&lt;/h1&gt;&lt;/body&gt;
+&lt;/html&gt;&quot;&quot;&quot;
+
+resposta = requests.post(
+    &quot;https://api.pdfservices.sistema.site/v1/html2pdf/html&quot;,
+    headers={&quot;X-Api-Key&quot;: api_key, &quot;Content-Type&quot;: &quot;text/html; charset=utf-8&quot;},
+    data=html.encode(&quot;utf-8&quot;),
+    timeout=60,
+)
+
+if not resposta.ok:
+    erro = resposta.json()
+    raise RuntimeError(f&quot;Falha {resposta.status_code}: {erro[&#x27;error&#x27;]} - {erro[&#x27;message&#x27;]}&quot;)
+
+with open(&quot;documento.pdf&quot;, &quot;wb&quot;) as arquivo:
+    arquivo.write(resposta.content)
+
+print(&quot;Cobrado: R$&quot;, resposta.headers[&quot;X-Charged-Amount&quot;])</code></pre>
+</div>
+  <p>A resposta traz o PDF em <code>application/pdf</code> e os headers <code>X-Charged-Amount</code> (valor cobrado), <code>X-Balance</code> (saldo restante) e <code>X-Transaction-Id</code>. Sempre defina um <code>timeout</code> nas chamadas HTTP.</p>
+  <div class="callout"><p><strong>Codifique o HTML em UTF-8</strong> ao enviar o corpo (<code>html.encode("utf-8")</code>) e declare o charset no <code>Content-Type</code>: assim acentos e cedilhas chegam intactos ao PDF.</p></div>
+</section>
+
+<section id="fastapi">
+  <h2>Exemplo com FastAPI e Jinja2</h2>
+  <p>Com FastAPI, use o <code>httpx</code> assíncrono para não bloquear o event loop, e o Jinja2 com autoescape para montar o HTML a partir de um template:</p>
+<div class="code">
+  <div class="code-header"><span class="code-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>main.py (FastAPI)</span></div>
+<pre><code>import os
+
+import httpx
+from fastapi import FastAPI, HTTPException
+from fastapi.responses import Response
+from jinja2 import Environment, FileSystemLoader, select_autoescape
+
+app = FastAPI()
+templates = Environment(loader=FileSystemLoader(&quot;templates&quot;), autoescape=select_autoescape())
+API_URL = &quot;https://api.pdfservices.sistema.site/v1/html2pdf/json&quot;
+
+
+@app.get(&quot;/faturas/{numero}/pdf&quot;)
+async def fatura_pdf(numero: str):
+    # O autoescape do Jinja2 impede que dados do usuário virem HTML no documento.
+    html = templates.get_template(&quot;fatura.html&quot;).render(numero=numero)
+
+    async with httpx.AsyncClient(timeout=60) as client:
+        resposta = await client.post(
+            API_URL,
+            json={&quot;html&quot;: html},
+            headers={&quot;X-Api-Key&quot;: os.environ[&quot;PDFSERVICES_API_KEY&quot;]},
+        )
+
+    if resposta.status_code != 200:
+        raise HTTPException(status_code=502, detail=f&quot;Falha ao gerar o PDF ({resposta.status_code}).&quot;)
+
+    return Response(
+        content=resposta.content,
+        media_type=&quot;application/pdf&quot;,
+        headers={&quot;Content-Disposition&quot;: &#x27;inline; filename=&quot;fatura.pdf&quot;&#x27;},
+    )</code></pre>
+</div>
+</section>
+
+<section id="django">
+  <h2>Exemplo com Django</h2>
+  <p>No Django, renderize o template normalmente com <code>render_to_string</code>, já com autoescape, e devolva o PDF em um <code>HttpResponse</code>:</p>
+<div class="code">
+  <div class="code-header"><span class="code-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>views.py (Django)</span></div>
+<pre><code>import os
+
+import requests
+from django.http import HttpResponse
+from django.template.loader import render_to_string
+
+
+def fatura_pdf(request, numero):
+    html = render_to_string(&quot;fatura.html&quot;, {&quot;numero&quot;: numero})
+
+    resposta = requests.post(
+        &quot;https://api.pdfservices.sistema.site/v1/html2pdf/json&quot;,
+        json={&quot;html&quot;: html},
+        headers={&quot;X-Api-Key&quot;: os.environ[&quot;PDFSERVICES_API_KEY&quot;]},
+        timeout=60,
+    )
+    resposta.raise_for_status()
+
+    return HttpResponse(resposta.content, content_type=&quot;application/pdf&quot;)</code></pre>
+</div>
+  <p>Você pode reaproveitar os templates e o CSS que já usa nas páginas do sistema. Basta um bloco <code>&lt;style&gt;</code> com as regras de <code>@page</code>.</p>
+</section>
+
+<section id="css-para-pdf">
+  <h2>CSS para PDF: tamanho da página, cabeçalho, rodapé e quebras</h2>
+  <p>O motor de conversão entende CSS de impressão (<em>paged media</em>). É com ele que você controla o documento, sem nada específico de Python:</p>
+<div class="code">
+  <div class="code-header"><span class="code-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>estilo.css (dentro de uma tag &lt;style&gt;)</span></div>
+<pre><code>@page {
+  size: A4;
+  margin: 2.5cm 2cm;
+  @top-center { content: &quot;Relatório mensal&quot;; }
+  @bottom-right { content: &quot;Página &quot; counter(page) &quot; de &quot; counter(pages); }
+}
+
+.nova-pagina { page-break-before: always; }
+
+/* Repete o cabeçalho da tabela em todas as páginas */
+thead { display: table-header-group; }</code></pre>
+</div>
+  <ul>
+    <li><strong>Tamanho e margens:</strong> <code>@page { size: A4; }</code>, <code>A4 landscape</code>, <code>Letter</code> ou medidas como <code>21cm 29.7cm</code>.</li>
+    <li><strong>Cabeçalho e rodapé:</strong> as caixas de margem (<code>@top-center</code>, <code>@bottom-right</code> etc.) com <code>counter(page)</code> e <code>counter(pages)</code> geram o "Página 1 de 3".</li>
+    <li><strong>Quebras:</strong> <code>page-break-before</code>, <code>page-break-after</code> e <code>page-break-inside: avoid</code> para não cortar blocos ao meio.</li>
+    <li><strong>Imagens:</strong> embutidas como <code>data:</code> URI ou por URL <strong>https</strong> pública, em JPG ou PNG.</li>
+    <li><strong>Fontes:</strong> as padrão já cobrem acentos; para a sua fonte, use <code>@font-face</code> com <code>data:</code> URI. Fontes por URL, como as do Google Fonts, não são baixadas.</li>
+    <li><strong>JavaScript não é executado:</strong> monte o HTML final no servidor. Para gráficos, gere uma imagem PNG antes.</li>
+  </ul>
+</section>
+
+<section id="erros">
+  <h2>Tratamento de erros</h2>
+  <p>Quando algo dá errado, a API responde com um JSON <code>{"error": "...", "message": "..."}</code>. Os casos que valem tratar no código:</p>
+  <table>
+    <thead><tr><th>HTTP</th><th>Código</th><th>O que fazer</th></tr></thead>
+    <tbody>
+      <tr><td>401</td><td><code>invalid_api_key</code></td><td>Confira a chave configurada; ela pode ter sido excluída no painel.</td></tr>
+      <tr><td>402</td><td><code>insufficient_balance</code></td><td>Saldo insuficiente: adicione créditos. Não adianta repetir a chamada.</td></tr>
+      <tr><td>413</td><td><code>payload_too_large</code></td><td>O corpo passou de 1 MB. Reduza imagens embutidas ou use URLs https.</td></tr>
+      <tr><td>422</td><td><code>conversion_failed</code></td><td>O HTML não pôde ser convertido. Revise o documento; a falha não é cobrada.</td></tr>
+      <tr><td>503</td><td><code>busy</code></td><td>Muitas chamadas simultâneas na mesma conta: repita com espera crescente.</td></tr>
+    </tbody>
+  </table>
+  <p>Com <code>requests</code>, um <code>HTTPAdapter</code> com <code>Retry(total=3, backoff_factor=1, status_forcelist=[503], allowed_methods=["POST"])</code> resolve as novas tentativas. Repita só no status 503 e em falhas de rede: repetir 401, 402 ou 422 não muda o resultado.</p>
+</section>
+
+<section id="custos-e-privacidade">
+  <h2>Custos e privacidade</h2>
+  <p>O PDF Services cobra <strong>R$ 0,001 por conversão bem-sucedida</strong>, com créditos pré-pagos e sem mensalidade: mil PDFs custam R$ 1,00. Conversões com erro não são cobradas.</p>
+  <p>O HTML enviado e o PDF gerado são processados só em memória e <strong>nunca são armazenados nem registrados em logs</strong>. Ficam registrados apenas metadados da transação, como data, tamanho e valor cobrado. Detalhes na <a href="../privacidade">Política de Privacidade</a>. Todo o código do serviço é aberto, sob a licença AGPL v3, e pode ser auditado no <a href="https://github.com/Leitonez/pdfservices">GitHub</a>.</p>
+</section>
+
+
+<div class="guide-cta">
+  <h2>Gere seu primeiro PDF agora</h2>
+  <p>Crie a conta da sua empresa, gere uma chave no painel e rode o exemplo acima. Pelo painel também dá para testar a conversão antes de escrever uma linha de código.</p>
+  <div class="cta-row">
+    <a class="btn btn-primary" href="../cadastro">Criar conta</a>
+    <a class="btn btn-ghost" href="https://my.pdfservices.sistema.site/login">Já tenho conta · Entrar</a>
+  </div>
+</div>
+
+<section id="outros-guias" class="guide-related">
+  <h2>Outros guias</h2>
+  <ul>
+    <li><a href="../gerar-pdf-a-partir-de-html-em-csharp">Gerar PDF a partir de HTML em C#</a></li>
+    <li><a href="../gerar-pdf-a-partir-de-html-em-nodejs">Gerar PDF a partir de HTML em Node.js</a></li>
+    <li><a href="../#integracao">Referência rápida da API, com exemplos em PHP e cURL</a></li>
+  </ul>
+</section>
+      </article>
+    </div>
+  </main>
+
+  <footer id="site-footer" class="site-footer" data-base="../">
+    <div class="container">
+      <p class="muted"><a href="../gerar-pdf-a-partir-de-html-em-csharp">HTML para PDF em C#</a> · <a href="../gerar-pdf-a-partir-de-html-em-nodejs">HTML para PDF em Node.js</a> · <a href="../gerar-pdf-a-partir-de-html-em-python">HTML para PDF em Python</a></p>
+      <p class="muted"><a href="../termos">Termos de Uso</a> · <a href="../privacidade">Política de Privacidade</a> · <a href="https://github.com/Leitonez/pdfservices">Código-fonte (GitHub)</a> · © CODECYCLE · Software livre sob AGPL v3</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@3.5.42/dist/vue.global.prod.js"></script>
+  <script type="module" src="../assets/js/pages/static.js"></script>
+</body>
+</html>

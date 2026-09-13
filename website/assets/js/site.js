@@ -139,6 +139,14 @@ const SiteFooter = {
             <li><a :href="base + '#faq'">Perguntas frequentes</a></li>
           </ul>
         </nav>
+        <nav class="footer-col" aria-labelledby="footer-guias">
+          <h2 id="footer-guias">Guias</h2>
+          <ul>
+            <li><a :href="base + 'gerar-pdf-a-partir-de-html-em-csharp'">HTML para PDF em C#</a></li>
+            <li><a :href="base + 'gerar-pdf-a-partir-de-html-em-nodejs'">HTML para PDF em Node.js</a></li>
+            <li><a :href="base + 'gerar-pdf-a-partir-de-html-em-python'">HTML para PDF em Python</a></li>
+          </ul>
+        </nav>
         <nav class="footer-col" aria-labelledby="footer-conta">
           <h2 id="footer-conta">Conta</h2>
           <ul>

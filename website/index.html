@@ -3,18 +3,26 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>PDF Services · API de HTML para PDF com iText | CODECYCLE</title>
-  <meta name="description" content="API HTTP que converte HTML em PDF com iText pdfHTML. Pague só por conversão bem-sucedida, sem mensalidade. Seu HTML e seu PDF nunca são armazenados. Código aberto sob AGPL v3.">
+  <title>API para converter HTML em PDF | PDF Services</title>
+  <meta name="description" content="API para converter HTML em PDF com iText. Pague só por conversão, sem mensalidade e sem armazenar seus documentos. Código aberto (AGPL v3).">
+  <meta name="keywords" content="api html para pdf, converter html em pdf, gerar pdf a partir de html, html to pdf, api de pdf, iText, iText pdfHTML, AGPL, AGPL v3, código aberto, PDF Services, CODECYCLE">
   <link rel="canonical" href="https://pdfservices.sistema.site/">
+  <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="theme-color" content="#0b1120">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="pt_BR">
   <meta property="og:site_name" content="PDF Services · CODECYCLE">
-  <meta property="og:title" content="PDF Services · HTML entra. PDF sai.">
-  <meta property="og:description" content="API de HTML para PDF com iText. Pague por uso, sem armazenar seus documentos, com código aberto (AGPL v3).">
+  <meta property="og:title" content="API para converter HTML em PDF | PDF Services">
+  <meta property="og:description" content="API para converter HTML em PDF com iText. Pague só por conversão, sem mensalidade e sem armazenar seus documentos. Código aberto (AGPL v3).">
   <meta property="og:url" content="https://pdfservices.sistema.site/">
-  <meta property="og:image" content="https://pdfservices.sistema.site/assets/img/logo-icon.png">
-  <meta name="twitter:card" content="summary">
+  <meta property="og:image" content="https://pdfservices.sistema.site/assets/img/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="PDF Services: API para converter HTML em PDF">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="API para converter HTML em PDF | PDF Services">
+  <meta name="twitter:description" content="API para converter HTML em PDF com iText. Pague só por conversão, sem mensalidade e sem armazenar seus documentos. Código aberto (AGPL v3).">
+  <meta name="twitter:image" content="https://pdfservices.sistema.site/assets/img/og-image.png">
   <link rel="icon" type="image/png" href="assets/img/logo-icon.png">
   <link rel="apple-touch-icon" href="assets/img/logo-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,6 +30,151 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap">
   <link rel="stylesheet" href="assets/css/theme.css">
   <link rel="stylesheet" href="assets/css/site.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://pdfservices.sistema.site/#organization",
+      "name": "CODECYCLE",
+      "legalName": "CODECYCLE INFORMATICA LTDA",
+      "url": "https://codecycle.com.br",
+      "logo": "https://pdfservices.sistema.site/assets/img/logo-icon.png",
+      "email": "produtos@codecycle.com.br",
+      "taxID": "21.768.520/0001-19",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "R. Dr. Thirso Martins, 100 - Cj. 118, Vila Mariana",
+        "addressLocality": "São Paulo",
+        "addressRegion": "SP",
+        "addressCountry": "BR"
+      },
+      "sameAs": [
+        "https://codecycle.com.br",
+        "https://github.com/Leitonez/pdfservices"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://pdfservices.sistema.site/#website",
+      "url": "https://pdfservices.sistema.site/",
+      "name": "PDF Services",
+      "inLanguage": "pt-BR",
+      "publisher": {
+        "@id": "https://pdfservices.sistema.site/#organization"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://pdfservices.sistema.site/#software",
+      "name": "PDF Services",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Web",
+      "url": "https://pdfservices.sistema.site/",
+      "description": "API para converter HTML em PDF com iText. Pague só por conversão, sem mensalidade e sem armazenar seus documentos. Código aberto (AGPL v3).",
+      "inLanguage": "pt-BR",
+      "license": "https://www.gnu.org/licenses/agpl-3.0.html",
+      "offers": {
+        "@type": "Offer",
+        "price": "0.001",
+        "priceCurrency": "BRL",
+        "description": "Preço por conversão bem-sucedida, pago com créditos pré-pagos. Sem mensalidade."
+      },
+      "publisher": {
+        "@id": "https://pdfservices.sistema.site/#organization"
+      },
+      "keywords": "api html para pdf, converter html em pdf, gerar pdf a partir de html, html to pdf, api de pdf, iText, iText pdfHTML, AGPL, AGPL v3, código aberto, PDF Services, CODECYCLE"
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://pdfservices.sistema.site/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Quanto custa usar o PDF Services?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "R$ 0,001 por conversão bem-sucedida, debitado de créditos pré-pagos em reais. Não há mensalidade, plano mínimo nem créditos gratuitos para novas contas. Conversões que falham, como um HTML que não pode ser convertido, não são cobradas."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Como adiciono créditos à minha conta?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nesta fase, os créditos são adicionados pela CODECYCLE: fale conosco pelo e-mail produtos@codecycle.com.br informando a sua conta. A compra online de créditos estará disponível em breve. Saldo e consumo ficam visíveis no painel. O saldo serve só para pagar conversões e não é resgatável em dinheiro."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Qual o tamanho máximo de um documento?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cada requisição pode ter até 1 MB, incluindo o HTML e as imagens embutidas como data: URI. Acima disso, a API responde 413 payload_too_large. Imagens referenciadas por URL são baixadas pelo serviço e têm limites próprios de tamanho e de tempo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Como incluo imagens no PDF?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "De duas formas: embutidas no HTML como data: URI, ou referenciadas por URL https pública, nos formatos JPG ou PNG. Endereços internos ou privados são bloqueados, e imagens que não atendam a essas condições podem não aparecer no PDF."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Posso usar CSS externo e minhas próprias fontes?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Folhas de estilo, fontes e scripts referenciados por URL não são baixados. Coloque o CSS numa tag style ou em atributos style. Fontes por URL (como Google Fonts) são ignoradas e o texto usa as fontes padrão do mecanismo, que já cobrem acentos e símbolos comuns. Para usar uma fonte própria, embuta-a com @font-face e data: URI. O arquivo da fonte conta no limite de 1 MB da requisição."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "O JavaScript da página é executado?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Não. O conteúdo gerado por JavaScript (gráficos, tabelas montadas no navegador) não aparece no PDF. Monte o HTML final no seu servidor antes de enviar; para gráficos, envie-os como imagem PNG."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Vocês guardam o HTML ou o PDF?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Não. Os dois são processados só em memória e nunca são armazenados nem registrados em logs. Guardamos apenas metadados da transação (data/hora, capacidade, chave usada, valor, saldo, tamanhos em bytes e duração) e registros de acesso (IP e data/hora) por 6 meses, como exige o Marco Civil da Internet. Por isso, não conseguimos recuperar um documento já convertido."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "O que a licença AGPL significa para a minha empresa?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "O código do PDF Services e a biblioteca iText são licenciados sob a GNU AGPL v3. A licença rege o código-fonte do software (uso, modificação e redistribuição), e a contratação do serviço hospedado é regida pelos Termos de Uso. Os PDFs gerados trazem essa identificação no metadado Producer. Não prestamos aconselhamento jurídico: recomendamos que sua empresa avalie as implicações da AGPL com a assessoria jurídica."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Como excluo minha conta?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Pelo painel, a qualquer momento, confirmando a senha. A exclusão é irreversível: nome, e-mail e hash da senha são apagados e todas as chaves de API são revogadas. O saldo remanescente é perdido. Razão social, CNPJ e histórico de transações são mantidos de forma anonimizada pelo prazo exigido por lei, conforme o art. 16 da LGPD."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Como falo com o suporte?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Fale com a CODECYCLE pelo e-mail produtos@codecycle.com.br. Encontrou um bug ou quer sugerir uma melhoria no código? Abra uma issue no repositório no GitHub."
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
 </head>
 <body class="site">
   <svg class="sprite" aria-hidden="true" focusable="false">
@@ -48,7 +201,13 @@
   </svg>
 
   <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
-  <header id="site-header" class="site-header" data-base=""></header>
+  <header id="site-header" class="site-header" data-base="">
+    <div class="container bar">
+      <a class="brand" href="./"><img src="assets/img/logo-code.png" alt="CODECYCLE" width="107" height="24"><span class="brand-divider" aria-hidden="true"></span><span class="brand-product">PDF <span>Services</span></span></a>
+      <nav class="site-nav" aria-label="Principal"><a href="#como-funciona">Como funciona</a><a href="#preco">Preço</a><a href="#privacidade">Privacidade</a><a href="#codigo-aberto">Código aberto</a><a href="#faq">FAQ</a></nav>
+      <div class="header-actions"><a class="btn btn-ghost desktop-only" href="https://my.pdfservices.sistema.site/login">Entrar</a><a class="btn btn-primary desktop-only" href="cadastro">Criar conta</a></div>
+    </div>
+  </header>
 
   <main id="conteudo" tabindex="-1">
     <!-- Hero -->
@@ -57,11 +216,12 @@
       <div class="container hero-grid">
         <div>
           <span class="prompt-pill"><span class="dollar">$</span> pdfservices --init <span class="cursor" aria-hidden="true"></span></span>
-          <h1 id="hero-title"><span class="line">HTML entra.</span> <span class="line grad">PDF sai.</span></h1>
+          <p class="hero-slogan"><span>HTML entra.</span> <span class="grad">PDF sai.</span></p>
+          <h1 id="hero-title">API para converter <span class="grad">HTML em PDF</span></h1>
           <p class="lead">Uma API HTTP simples que transforma o seu HTML em PDF com o motor <strong>iText pdfHTML</strong>. Você paga só pelas conversões bem-sucedidas, seus documentos nunca são armazenados e todo o código é aberto.</p>
           <div class="cta-row">
             <a class="btn btn-primary btn-lg" href="cadastro">Criar conta <svg class="i i-sm" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-            <a class="btn btn-ghost btn-lg" :href="config.sourceCodeUrl" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-github"/></svg> Ver código no GitHub</a>
+            <a class="btn btn-ghost btn-lg" href="https://github.com/Leitonez/pdfservices" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-github"/></svg> Ver código no GitHub</a>
           </div>
           <ul class="hero-points">
             <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg> Sem mensalidade</li>
@@ -87,7 +247,7 @@
 <span class="ok">HTTP/1.1 200 OK</span>
 <span class="p">Content-Type</span>: application/pdf
 <span class="p">X-Transaction-Id</span>: 9f3c2a7e5b1d4c08a6e2f0b7d91c3a54
-<span class="p">X-Charged-Amount</span>: <span class="n" v-cloak>{{ priceRaw }}</span>
+<span class="p">X-Charged-Amount</span>: <span class="n" v-live="priceRaw">0.001</span>
 <span class="p">X-Balance</span>: <span class="n">49.999</span></code></pre>
           </figure>
           <div class="pdf-chip" aria-hidden="true">
@@ -102,7 +262,7 @@
     <section class="section-tight" aria-label="Destaques">
       <div class="container">
         <dl class="stats">
-          <div class="stat"><dt>por conversão bem-sucedida</dt><dd><span class="violet" v-cloak>{{ priceLabel }}</span></dd></div>
+          <div class="stat"><dt>por conversão bem-sucedida</dt><dd><span class="violet" v-live="priceLabel">R$ 0,001</span></dd></div>
           <div class="stat"><dt>do seu HTML armazenados</dt><dd><span class="green">0 bytes</span></dd></div>
           <div class="stat"><dt>por requisição</dt><dd><span class="accent">1 MB</span></dd></div>
           <div class="stat"><dt>código aberto (AGPL v3)</dt><dd><span class="pink">100%</span></dd></div>
@@ -302,6 +462,37 @@ file_put_contents(<span class="s">'documento.pdf'</span>, $body);</code></pre>
       </div>
     </section>
 
+    <!-- Guides -->
+    <section id="guias" class="section" aria-labelledby="guias-title">
+      <div class="container">
+        <div class="section-head">
+          <span class="kicker">// guias</span>
+          <h2 id="guias-title">Guias: gerar PDF a partir de HTML na sua linguagem</h2>
+          <p>Passo a passo com código completo, comparando as bibliotecas locais mais usadas com a chamada à API.</p>
+        </div>
+        <div class="guide-cards">
+          <a class="card guide-card" href="gerar-pdf-a-partir-de-html-em-csharp">
+            <span class="lang">C# · .NET</span>
+            <h3>Gerar PDF a partir de HTML em C#</h3>
+            <p>HttpClient, ASP.NET Core e as alternativas iText, PuppeteerSharp e Playwright.</p>
+            <span class="more">Ler o guia →</span>
+          </a>
+          <a class="card guide-card" href="gerar-pdf-a-partir-de-html-em-nodejs">
+            <span class="lang">JavaScript · Node.js</span>
+            <h3>Gerar PDF a partir de HTML em Node.js</h3>
+            <p>fetch nativo, Express e as alternativas Puppeteer e Playwright.</p>
+            <span class="more">Ler o guia →</span>
+          </a>
+          <a class="card guide-card" href="gerar-pdf-a-partir-de-html-em-python">
+            <span class="lang">Python</span>
+            <h3>Gerar PDF a partir de HTML em Python</h3>
+            <p>requests, FastAPI e Django, e as alternativas WeasyPrint e Playwright.</p>
+            <span class="more">Ler o guia →</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
     <!-- Pricing -->
     <section id="preco" class="section" aria-labelledby="preco-title">
       <div class="container">
@@ -313,8 +504,8 @@ file_put_contents(<span class="s">'documento.pdf'</span>, $body);</code></pre>
         <div class="pricing-grid">
           <div class="card price-card">
             <span class="badge">Pague por uso · html2pdf</span>
-            <p class="price"><strong v-cloak>{{ priceLabel }}</strong><span>por conversão bem-sucedida</span></p>
-            <p class="price-sub">R$ 1,00 rende <strong v-cloak>{{ perReal }}</strong> PDFs.</p>
+            <p class="price"><strong v-live="priceLabel">R$ 0,001</strong><span>por conversão bem-sucedida</span></p>
+            <p class="price-sub">R$ 1,00 rende <strong v-live="perReal">1.000</strong> PDFs.</p>
             <ul class="check-list">
               <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Créditos pré-pagos em R$, sem mensalidade nem fidelidade</li>
               <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Cobrança só quando o PDF é gerado: conversões com erro não são cobradas</li>
@@ -336,12 +527,12 @@ file_put_contents(<span class="s">'documento.pdf'</span>, $body);</code></pre>
               <div class="range-scale" aria-hidden="true"><span>1 mil</span><span>1 milhão</span></div>
             </div>
             <div class="calc-output" aria-live="polite">
-              <div class="calc-box"><span>Conversões</span><strong v-cloak>{{ volumeLabel }}</strong></div>
-              <div class="calc-box total"><span>Custo estimado</span><strong v-cloak>{{ costLabel }}</strong></div>
+              <div class="calc-box"><span>Conversões</span><strong v-live="volumeLabel">10.000</strong></div>
+              <div class="calc-box total"><span>Custo estimado</span><strong v-live="costLabel">R$ 10,00</strong></div>
             </div>
             <div class="how-credits">
               <p><strong>Como adicionar créditos:</strong> por enquanto, fale com a CODECYCLE para carregar o saldo da sua conta. A compra online de créditos chega em breve.</p>
-              <p><a class="btn btn-ghost btn-sm" :href="config.contactUrl">Falar com a CODECYCLE</a></p>
+              <p><a class="btn btn-ghost btn-sm" href="mailto:produtos@codecycle.com.br">Falar com a CODECYCLE</a></p>
             </div>
           </div>
         </div>
@@ -478,7 +669,7 @@ file_put_contents(<span class="s">'documento.pdf'</span>, $body);</code></pre>
           <div class="card repo-card">
             <div class="repo-head">
               <svg class="i i-lg" aria-hidden="true"><use href="#i-github"/></svg>
-              <a :href="config.sourceCodeUrl" target="_blank" rel="noopener">Leitonez/pdfservices</a>
+              <a href="https://github.com/Leitonez/pdfservices" target="_blank" rel="noopener">Leitonez/pdfservices</a>
             </div>
             <p>Código-fonte completo do serviço: API de conversão, painel do cliente e este site.</p>
             <div class="repo-meta">
@@ -487,7 +678,7 @@ file_put_contents(<span class="s">'documento.pdf'</span>, $body);</code></pre>
               <span class="badge badge-muted">Público</span>
             </div>
             <div class="btn-row">
-              <a class="btn btn-primary" :href="config.sourceCodeUrl" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-github"/></svg> Ver código no GitHub</a>
+              <a class="btn btn-primary" href="https://github.com/Leitonez/pdfservices" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-github"/></svg> Ver código no GitHub</a>
               <a class="btn btn-ghost" href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank" rel="noopener">Ler a licença</a>
             </div>
           </div>
@@ -524,13 +715,13 @@ file_put_contents(<span class="s">'documento.pdf'</span>, $body);</code></pre>
           <details>
             <summary>Quanto custa usar o PDF Services?</summary>
             <div class="answer">
-              <p><strong v-cloak>{{ priceLabel }}</strong> por conversão bem-sucedida, debitado de créditos pré-pagos em reais. Não há mensalidade, plano mínimo nem créditos gratuitos para novas contas. Conversões que falham, como um HTML que não pode ser convertido, não são cobradas.</p>
+              <p><strong v-live="priceLabel">R$ 0,001</strong> por conversão bem-sucedida, debitado de créditos pré-pagos em reais. Não há mensalidade, plano mínimo nem créditos gratuitos para novas contas. Conversões que falham, como um HTML que não pode ser convertido, não são cobradas.</p>
             </div>
           </details>
           <details>
             <summary>Como adiciono créditos à minha conta?</summary>
             <div class="answer">
-              <p>Nesta fase, os créditos são adicionados pela CODECYCLE: <a :href="config.contactUrl">fale conosco</a> informando a sua conta. A compra online de créditos estará disponível em breve. Saldo e consumo ficam visíveis no painel. O saldo serve só para pagar conversões e não é resgatável em dinheiro.</p>
+              <p>Nesta fase, os créditos são adicionados pela CODECYCLE: <a href="mailto:produtos@codecycle.com.br">fale conosco</a> informando a sua conta. A compra online de créditos estará disponível em breve. Saldo e consumo ficam visíveis no painel. O saldo serve só para pagar conversões e não é resgatável em dinheiro.</p>
             </div>
           </details>
           <details>
@@ -578,7 +769,7 @@ file_put_contents(<span class="s">'documento.pdf'</span>, $body);</code></pre>
           <details>
             <summary>Como falo com o suporte?</summary>
             <div class="answer">
-              <p>Fale com a CODECYCLE pelo e-mail <a :href="config.contactUrl">{{ config.contactEmail }}</a>. Encontrou um bug ou quer sugerir uma melhoria no código? Abra uma issue no <a :href="config.sourceCodeUrl" target="_blank" rel="noopener">repositório no GitHub</a>.</p>
+              <p>Fale com a CODECYCLE pelo e-mail <a href="mailto:produtos@codecycle.com.br">produtos@codecycle.com.br</a>. Encontrou um bug ou quer sugerir uma melhoria no código? Abra uma issue no <a href="https://github.com/Leitonez/pdfservices" target="_blank" rel="noopener">repositório no GitHub</a>.</p>
             </div>
           </details>
         </div>
@@ -594,7 +785,7 @@ file_put_contents(<span class="s">'documento.pdf'</span>, $body);</code></pre>
           <p>Crie a conta da sua empresa, gere uma chave de API e converta HTML em PDF com uma única requisição.</p>
           <div class="cta-row">
             <a class="btn btn-primary btn-lg" href="cadastro">Criar conta <svg class="i i-sm" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-            <a class="btn btn-ghost btn-lg" :href="loginUrl">Já tenho conta · Entrar</a>
+            <a class="btn btn-ghost btn-lg" :href="loginUrl" href="https://my.pdfservices.sistema.site/login">Já tenho conta · Entrar</a>
           </div>
         </div>
       </div>
@@ -603,6 +794,7 @@ file_put_contents(<span class="s">'documento.pdf'</span>, $body);</code></pre>
 
   <footer id="site-footer" class="site-footer" data-base="">
     <div class="container">
+      <p class="muted"><a href="gerar-pdf-a-partir-de-html-em-csharp">HTML para PDF em C#</a> · <a href="gerar-pdf-a-partir-de-html-em-nodejs">HTML para PDF em Node.js</a> · <a href="gerar-pdf-a-partir-de-html-em-python">HTML para PDF em Python</a></p>
       <p class="muted"><a href="termos">Termos de Uso</a> · <a href="privacidade">Política de Privacidade</a> · <a href="https://github.com/Leitonez/pdfservices">Código-fonte (GitHub)</a> · © CODECYCLE · Software livre sob AGPL v3</p>
     </div>
   </footer>

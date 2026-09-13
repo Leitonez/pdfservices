@@ -1233,7 +1233,7 @@ figure {
 }
 
 @media (min-width: 720px) {
-  .footer-grid { grid-template-columns: 1.4fr repeat(3, minmax(0, 1fr)); }
+  .footer-grid { grid-template-columns: 1.4fr repeat(4, minmax(0, 1fr)); }
 }
 
 .footer-about p {
@@ -1843,4 +1843,107 @@ figure {
   .legal-aside { display: none !important; }
   body { background: #fff; color: #000; }
   .legal, .legal h1, .legal h2, .legal h3, .legal strong { color: #000; }
+}
+
+/* ---------- SEO update: keyword H1 with the slogan above it ---------- */
+.hero-slogan {
+  margin: 22px 0 0;
+  font: 700 clamp(1.25rem, 2.4vw, 1.6rem)/1.2 var(--font-heading);
+  letter-spacing: -0.02em;
+  color: var(--text-2);
+}
+
+.hero h1 {
+  margin: 10px 0 18px;
+  font-size: clamp(2.3rem, 5.4vw, 3.9rem);
+  line-height: 1.05;
+}
+
+/* ---------- Guides (home cards + article pages) ---------- */
+.guide-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+.guide-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: var(--text-2);
+  text-decoration: none;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.guide-card:hover {
+  border-color: var(--primary);
+  color: var(--text-2);
+  text-decoration: none;
+  transform: translateY(-2px);
+}
+
+.guide-card .lang {
+  font: 600 0.78rem/1.2 var(--font-mono);
+  color: var(--primary-300);
+}
+
+.guide-card h3 {
+  margin: 0;
+  font-size: 1.18rem;
+  color: var(--text);
+}
+
+.guide-card p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.guide-card .more {
+  margin-top: auto;
+  padding-top: 6px;
+  font-weight: 600;
+  color: var(--primary-300);
+}
+
+.guide .code {
+  margin: 1.2em 0 1.6em;
+}
+
+.guide .code pre {
+  font-size: 0.84rem;
+  line-height: 1.65;
+}
+
+.guide .callout {
+  margin: 1.4em 0;
+  padding: 16px 18px;
+  border-radius: var(--radius);
+  border: 1px solid rgba(139, 92, 246, 0.35);
+  background: var(--primary-soft);
+}
+
+.guide .callout p:last-child {
+  margin-bottom: 0;
+}
+
+.guide-cta {
+  margin: 2.6em 0 0;
+  padding: 26px 28px;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(139, 92, 246, 0.35);
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.18), rgba(6, 182, 212, 0.08));
+}
+
+.guide-cta h2 {
+  margin: 0 0 0.4em;
+  padding: 0;
+  border: 0;
+}
+
+.guide-cta .cta-row {
+  margin: 18px 0 0;
+}
+
+.guide-related {
+  margin-top: 2em;
 }

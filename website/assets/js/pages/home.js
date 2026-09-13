@@ -93,4 +93,13 @@ createApp({
       }
     }
   }
+}).directive('live', {
+  // v-live="expr": the element keeps a static fallback text in the HTML (seen by crawlers, link previews and
+  // before Vue loads); once mounted, Vue replaces it with the live value and keeps it updated.
+  mounted(el, binding) {
+    el.textContent = binding.value;
+  },
+  updated(el, binding) {
+    el.textContent = binding.value;
+  }
 }).mount('#conteudo');

@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gerar PDF a partir de HTML em Node.js | PDF Services</title>
+  <meta name="description" content="Como gerar PDF a partir de HTML em Node.js: compare Puppeteer, Playwright e PDFKit e veja o código com fetch e Express, via API com iText (AGPL).">
+  <meta name="keywords" content="gerar pdf a partir de html node.js, html para pdf node, converter html em pdf javascript, puppeteer pdf, express pdf, iText, iText pdfHTML, AGPL, Playwright">
+  <link rel="canonical" href="https://pdfservices.sistema.site/gerar-pdf-a-partir-de-html-em-nodejs">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="theme-color" content="#0b1120">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="PDF Services · CODECYCLE">
+  <meta property="og:title" content="Gerar PDF a partir de HTML em Node.js | PDF Services">
+  <meta property="og:description" content="Como gerar PDF a partir de HTML em Node.js: compare Puppeteer, Playwright e PDFKit e veja o código com fetch e Express, via API com iText (AGPL).">
+  <meta property="og:url" content="https://pdfservices.sistema.site/gerar-pdf-a-partir-de-html-em-nodejs">
+  <meta property="og:image" content="https://pdfservices.sistema.site/assets/img/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="article:published_time" content="2026-09-12">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/png" href="../assets/img/logo-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="../assets/css/theme.css">
+  <link rel="stylesheet" href="../assets/css/site.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "TechArticle",
+      "headline": "Gerar PDF a partir de HTML em Node.js",
+      "description": "Como gerar PDF a partir de HTML em Node.js: compare Puppeteer, Playwright e PDFKit e veja o código com fetch e Express, via API com iText (AGPL).",
+      "inLanguage": "pt-BR",
+      "datePublished": "2026-09-12",
+      "dateModified": "2026-09-12",
+      "image": "https://pdfservices.sistema.site/assets/img/og-image.png",
+      "author": {
+        "@type": "Organization",
+        "name": "CODECYCLE",
+        "url": "https://codecycle.com.br"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "CODECYCLE",
+        "url": "https://codecycle.com.br",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://pdfservices.sistema.site/assets/img/logo-icon.png"
+        }
+      },
+      "mainEntityOfPage": "https://pdfservices.sistema.site/gerar-pdf-a-partir-de-html-em-nodejs",
+      "proficiencyLevel": "Beginner",
+      "keywords": "gerar pdf a partir de html node.js, html para pdf node, converter html em pdf javascript, puppeteer pdf, express pdf, iText, iText pdfHTML, AGPL, Playwright"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Início",
+          "item": "https://pdfservices.sistema.site/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Guias",
+          "item": "https://pdfservices.sistema.site/#guias"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "HTML para PDF em Node.js",
+          "item": "https://pdfservices.sistema.site/gerar-pdf-a-partir-de-html-em-nodejs"
+        }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+<body class="site">
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <header id="site-header" class="site-header" data-base="../">
+    <div class="container bar">
+      <a class="brand" href="../"><img src="../assets/img/logo-code.png" alt="CODECYCLE" width="107" height="24"><span class="brand-divider" aria-hidden="true"></span><span class="brand-product">PDF <span>Services</span></span></a>
+      <nav class="site-nav" aria-label="Principal"><a href="../#como-funciona">Como funciona</a><a href="../#preco">Preço</a><a href="../#privacidade">Privacidade</a><a href="../#codigo-aberto">Código aberto</a><a href="../#faq">FAQ</a></nav>
+      <div class="header-actions"><a class="btn btn-ghost desktop-only" href="https://my.pdfservices.sistema.site/login">Entrar</a><a class="btn btn-primary desktop-only" href="../cadastro">Criar conta</a></div>
+    </div>
+  </header>
+
+  <main id="conteudo" class="legal-page has-glow" tabindex="-1">
+    <div class="page-glow grid-bg" aria-hidden="true"></div>
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Trilha de navegação">
+        <ol><li><a href="../">Início</a></li><li><a href="../#guias">Guias</a></li><li aria-current="page">HTML para PDF em Node.js</li></ol>
+      </nav>
+      <article class="legal guide" aria-labelledby="doc-title">
+        <h1 id="doc-title">Gerar PDF a partir de HTML em Node.js</h1>
+        <p>Guia · atualizado em 12/09/2026 · 8 min de leitura</p>
+<p class="lead">Precisa <strong>gerar PDF a partir de HTML em Node.js</strong>? Faturas, relatórios e ingressos costumam nascer como HTML, porque é o jeito mais rápido de desenhar um documento. Este guia compara as bibliotecas mais usadas no ecossistema JavaScript e mostra o código completo com <code>fetch</code> nativo e Express, usando a API do PDF Services.</p>
+<nav aria-label="Sumário">
+  <ol>
+    <li><a href="#opcoes">As opções no Node.js</a></li>
+    <li><a href="#passo-a-passo">Passo a passo com fetch</a></li>
+    <li><a href="#express">Exemplo com Express</a></li>
+    <li><a href="#css-para-pdf">CSS para PDF</a></li>
+    <li><a href="#erros">Tratamento de erros</a></li>
+    <li><a href="#serverless">Serverless e containers</a></li>
+    <li><a href="#custos-e-privacidade">Custos e privacidade</a></li>
+  </ol>
+</nav>
+
+<section id="opcoes">
+  <h2>As opções no ecossistema Node.js</h2>
+  <table>
+    <thead><tr><th>Opção</th><th>Como funciona</th><th>Pontos de atenção</th></tr></thead>
+    <tbody>
+      <tr><td>Puppeteer</td><td>Controla um Chromium headless e usa <code>page.pdf()</code>.</td><td>Baixa um navegador de centenas de MB, consome bastante memória e exige pacotes especiais em serverless (Lambda, Vercel).</td></tr>
+      <tr><td>Playwright</td><td>Mesma ideia do Puppeteer, com API moderna.</td><td>A geração de PDF só funciona no Chromium; os mesmos custos de rodar um navegador.</td></tr>
+      <tr><td>PDFKit, pdfmake, jsPDF</td><td>Constroem o PDF por código, elemento por elemento.</td><td>Não convertem HTML de verdade: cada layout precisa ser reescrito na API da biblioteca.</td></tr>
+      <tr><td>html-pdf (PhantomJS)</td><td>Wrapper do PhantomJS.</td><td>PhantomJS está descontinuado há anos. Evite.</td></tr>
+      <tr><td>API HTTP (PDF Services)</td><td>Você envia o HTML e recebe o PDF.</td><td>Depende de rede e é cobrado por uso, mas não há navegador para instalar nem memória extra no servidor.</td></tr>
+    </tbody>
+  </table>
+  <p>O PDF Services converte com o <strong>iText pdfHTML</strong>, um motor maduro de conversão de HTML e CSS para PDF, e todo o código do serviço é aberto sob a licença <strong>AGPL v3</strong>. Você não precisa instalar o iText, Java ou .NET: a conversão acontece na API.</p>
+  <p>Se o documento depende de JavaScript rodando na página, como um gráfico desenhado em canvas, um navegador headless é necessário. Para documentos montados no servidor com templates (EJS, Handlebars, Nunjucks, React renderizado para string), uma API de conversão resolve com uma requisição.</p>
+</section>
+
+<section id="passo-a-passo">
+  <h2>Passo a passo com fetch (Node.js 18 ou superior)</h2>
+  <h3>1. Crie a conta e a chave</h3>
+  <p><a href="../cadastro">Cadastre a empresa</a>, confirme o e-mail e gere uma chave em <em>Chaves de API</em> no painel. Guarde-a como segredo, em variável de ambiente ou gerenciador de segredos, nunca no repositório.</p>
+  <h3>2. Envie o HTML e salve o PDF</h3>
+  <p>O Node.js 18 já traz <code>fetch</code>, então não é preciso instalar nada. Salve como <code>gerar-pdf.mjs</code>, porque o <code>await</code> no nível do arquivo exige ES modules:</p>
+<div class="code">
+  <div class="code-header"><span class="code-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>gerar-pdf.mjs</span></div>
+<pre><code>import { writeFile } from &#x27;node:fs/promises&#x27;;
+
+const apiKey = process.env.PDFSERVICES_API_KEY;
+if (!apiKey) throw new Error(&#x27;Defina a variável PDFSERVICES_API_KEY.&#x27;);
+
+const html = `&lt;!doctype html&gt;
+&lt;html lang=&quot;pt-BR&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;style&gt;
+    @page { size: A4; margin: 2cm; }
+    body { font-family: sans-serif; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;&lt;h1&gt;Olá, PDF!&lt;/h1&gt;&lt;/body&gt;
+&lt;/html&gt;`;
+
+const response = await fetch(&#x27;https://api.pdfservices.sistema.site/v1/html2pdf/html&#x27;, {
+  method: &#x27;POST&#x27;,
+  headers: { &#x27;X-Api-Key&#x27;: apiKey, &#x27;Content-Type&#x27;: &#x27;text/html; charset=utf-8&#x27; },
+  body: html
+});
+
+if (!response.ok) {
+  const erro = await response.json().catch(() =&gt; ({}));
+  throw new Error(`Falha ${response.status}: ${erro.error} - ${erro.message}`);
+}
+
+await writeFile(&#x27;documento.pdf&#x27;, Buffer.from(await response.arrayBuffer()));
+console.log(&#x27;Cobrado: R$&#x27;, response.headers.get(&#x27;x-charged-amount&#x27;));</code></pre>
+</div>
+  <p>Rode com <code>PDFSERVICES_API_KEY=pdfs_... node gerar-pdf.mjs</code>. Os headers da resposta trazem o valor cobrado (<code>X-Charged-Amount</code>), o saldo restante (<code>X-Balance</code>) e o identificador da transação (<code>X-Transaction-Id</code>).</p>
+  <div class="callout"><p><strong>Nunca chame a API a partir do navegador</strong> com a sua chave: ela ficaria visível para qualquer visitante. Faça a chamada no back-end e entregue apenas o PDF ao usuário.</p></div>
+</section>
+
+<section id="express">
+  <h2>Exemplo com Express: gerando o PDF sob demanda</h2>
+  <p>Aqui a rota monta o HTML, envia no formato JSON e repassa o PDF ao cliente em streaming com <code>Readable.fromWeb</code>, sem guardar o arquivo inteiro na memória:</p>
+<div class="code">
+  <div class="code-header"><span class="code-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>server.mjs (Express)</span></div>
+<pre><code>import express from &#x27;express&#x27;;
+import { Readable } from &#x27;node:stream&#x27;;
+
+const app = express();
+const API_URL = &#x27;https://api.pdfservices.sistema.site/v1/html2pdf/json&#x27;;
+
+// Todo dado vindo do usuário deve ser escapado antes de entrar no HTML.
+const escapeHtml = (texto) =&gt; String(texto).replace(/[&amp;&lt;&gt;&quot;&#x27;]/g, (c) =&gt; (
+  { &#x27;&amp;&#x27;: &#x27;&amp;amp;&#x27;, &#x27;&lt;&#x27;: &#x27;&amp;lt;&#x27;, &#x27;&gt;&#x27;: &#x27;&amp;gt;&#x27;, &#x27;&quot;&#x27;: &#x27;&amp;quot;&#x27;, &quot;&#x27;&quot;: &#x27;&amp;#39;&#x27; }[c]
+));
+
+app.get(&#x27;/faturas/:numero/pdf&#x27;, async (req, res, next) =&gt; {
+  try {
+    const html = `&lt;!doctype html&gt;
+      &lt;html lang=&quot;pt-BR&quot;&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;/head&gt;
+      &lt;body&gt;&lt;h1&gt;Fatura ${escapeHtml(req.params.numero)}&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;`;
+
+    const response = await fetch(API_URL, {
+      method: &#x27;POST&#x27;,
+      headers: { &#x27;X-Api-Key&#x27;: process.env.PDFSERVICES_API_KEY, &#x27;Content-Type&#x27;: &#x27;application/json&#x27; },
+      body: JSON.stringify({ html })
+    });
+
+    if (!response.ok) {
+      return res.status(502).json({ erro: `Falha ao gerar o PDF (${response.status}).` });
+    }
+
+    res.set(&#x27;Content-Type&#x27;, &#x27;application/pdf&#x27;);
+    res.set(&#x27;Content-Disposition&#x27;, &#x27;inline; filename=&quot;fatura.pdf&quot;&#x27;);
+    // Repassa o PDF em streaming, sem guardá-lo inteiro na memória.
+    Readable.fromWeb(response.body).pipe(res);
+  } catch (error) {
+    next(error);
+  }
+});
+
+app.listen(3000);</code></pre>
+</div>
+  <p>Em projetos maiores, gere o HTML com a engine de templates que você já usa. Deixe o escape automático ligado: é ele que impede que um dado do usuário vire HTML dentro do documento.</p>
+</section>
+
+<section id="css-para-pdf">
+  <h2>CSS para PDF: tamanho da página, cabeçalho, rodapé e quebras</h2>
+  <p>O motor de conversão entende CSS de impressão (<em>paged media</em>). É com ele que você controla o documento, sem nada específico de Node.js:</p>
+<div class="code">
+  <div class="code-header"><span class="code-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>estilo.css (dentro de uma tag &lt;style&gt;)</span></div>
+<pre><code>@page {
+  size: A4;
+  margin: 2.5cm 2cm;
+  @top-center { content: &quot;Relatório mensal&quot;; }
+  @bottom-right { content: &quot;Página &quot; counter(page) &quot; de &quot; counter(pages); }
+}
+
+.nova-pagina { page-break-before: always; }
+
+/* Repete o cabeçalho da tabela em todas as páginas */
+thead { display: table-header-group; }</code></pre>
+</div>
+  <ul>
+    <li><strong>Tamanho e margens:</strong> <code>@page { size: A4; }</code>, <code>A4 landscape</code>, <code>Letter</code> ou medidas como <code>21cm 29.7cm</code>.</li>
+    <li><strong>Cabeçalho e rodapé:</strong> as caixas de margem (<code>@top-center</code>, <code>@bottom-right</code> etc.) com <code>counter(page)</code> e <code>counter(pages)</code> geram o "Página 1 de 3".</li>
+    <li><strong>Quebras:</strong> <code>page-break-before</code>, <code>page-break-after</code> e <code>page-break-inside: avoid</code> para não cortar blocos ao meio.</li>
+    <li><strong>Imagens:</strong> embutidas como <code>data:</code> URI ou por URL <strong>https</strong> pública, em JPG ou PNG.</li>
+    <li><strong>Fontes:</strong> as padrão já cobrem acentos; para a sua fonte, use <code>@font-face</code> com <code>data:</code> URI. Fontes por URL, como as do Google Fonts, não são baixadas.</li>
+    <li><strong>JavaScript não é executado:</strong> monte o HTML final no servidor. Para gráficos, gere uma imagem PNG antes.</li>
+  </ul>
+</section>
+
+<section id="erros">
+  <h2>Tratamento de erros</h2>
+  <p>Quando algo dá errado, a API responde com um JSON <code>{"error": "...", "message": "..."}</code>. Os casos que valem tratar no código:</p>
+  <table>
+    <thead><tr><th>HTTP</th><th>Código</th><th>O que fazer</th></tr></thead>
+    <tbody>
+      <tr><td>401</td><td><code>invalid_api_key</code></td><td>Confira a chave configurada; ela pode ter sido excluída no painel.</td></tr>
+      <tr><td>402</td><td><code>insufficient_balance</code></td><td>Saldo insuficiente: adicione créditos. Não adianta repetir a chamada.</td></tr>
+      <tr><td>413</td><td><code>payload_too_large</code></td><td>O corpo passou de 1 MB. Reduza imagens embutidas ou use URLs https.</td></tr>
+      <tr><td>422</td><td><code>conversion_failed</code></td><td>O HTML não pôde ser convertido. Revise o documento; a falha não é cobrada.</td></tr>
+      <tr><td>503</td><td><code>busy</code></td><td>Muitas chamadas simultâneas na mesma conta: repita com espera crescente.</td></tr>
+    </tbody>
+  </table>
+  <p>Para novas tentativas, um laço simples com espera crescente (1 s, 2 s, 4 s) resolve. Aplique-o só ao status 503 e a falhas de rede: repetir 401, 402 ou 422 não muda o resultado.</p>
+</section>
+
+<section id="serverless">
+  <h2>Serverless e containers</h2>
+  <p>Em AWS Lambda, Vercel, Netlify Functions ou Google Cloud Functions, rodar Puppeteer exige pacotes especiais de Chromium, mais memória e cold starts mais longos. Com uma API, a função só faz uma requisição HTTP. O pacote de deploy continua pequeno e o consumo de memória não depende do tamanho do documento.</p>
+</section>
+
+<section id="custos-e-privacidade">
+  <h2>Custos e privacidade</h2>
+  <p>O PDF Services cobra <strong>R$ 0,001 por conversão bem-sucedida</strong>, com créditos pré-pagos e sem mensalidade: mil PDFs custam R$ 1,00. Conversões com erro não são cobradas.</p>
+  <p>O HTML enviado e o PDF gerado são processados só em memória e <strong>nunca são armazenados nem registrados em logs</strong>. Ficam registrados apenas metadados da transação, como data, tamanho e valor cobrado. Detalhes na <a href="../privacidade">Política de Privacidade</a>. Todo o código do serviço é aberto, sob a licença AGPL v3, e pode ser auditado no <a href="https://github.com/Leitonez/pdfservices">GitHub</a>.</p>
+</section>
+
+
+<div class="guide-cta">
+  <h2>Gere seu primeiro PDF agora</h2>
+  <p>Crie a conta da sua empresa, gere uma chave no painel e rode o exemplo acima. Pelo painel também dá para testar a conversão antes de escrever uma linha de código.</p>
+  <div class="cta-row">
+    <a class="btn btn-primary" href="../cadastro">Criar conta</a>
+    <a class="btn btn-ghost" href="https://my.pdfservices.sistema.site/login">Já tenho conta · Entrar</a>
+  </div>
+</div>
+
+<section id="outros-guias" class="guide-related">
+  <h2>Outros guias</h2>
+  <ul>
+    <li><a href="../gerar-pdf-a-partir-de-html-em-csharp">Gerar PDF a partir de HTML em C#</a></li>
+    <li><a href="../gerar-pdf-a-partir-de-html-em-python">Gerar PDF a partir de HTML em Python</a></li>
+    <li><a href="../#integracao">Referência rápida da API, com exemplos em PHP e cURL</a></li>
+  </ul>
+</section>
+      </article>
+    </div>
+  </main>
+
+  <footer id="site-footer" class="site-footer" data-base="../">
+    <div class="container">
+      <p class="muted"><a href="../gerar-pdf-a-partir-de-html-em-csharp">HTML para PDF em C#</a> · <a href="../gerar-pdf-a-partir-de-html-em-nodejs">HTML para PDF em Node.js</a> · <a href="../gerar-pdf-a-partir-de-html-em-python">HTML para PDF em Python</a></p>
+      <p class="muted"><a href="../termos">Termos de Uso</a> · <a href="../privacidade">Política de Privacidade</a> · <a href="https://github.com/Leitonez/pdfservices">Código-fonte (GitHub)</a> · © CODECYCLE · Software livre sob AGPL v3</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@3.5.42/dist/vue.global.prod.js"></script>
+  <script type="module" src="../assets/js/pages/static.js"></script>
+</body>
+</html>

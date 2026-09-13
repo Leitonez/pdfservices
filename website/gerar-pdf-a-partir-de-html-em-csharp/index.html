@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gerar PDF a partir de HTML em C# (.NET) | PDF Services</title>
+  <meta name="description" content="Como gerar PDF a partir de HTML em C#: compare iText (AGPL), PuppeteerSharp e Playwright e veja o código com HttpClient e ASP.NET Core.">
+  <meta name="keywords" content="gerar pdf a partir de html c#, html para pdf c#, converter html em pdf .net, asp.net core pdf, httpclient pdf, iText, iText pdfHTML, AGPL, PuppeteerSharp, Playwright">
+  <link rel="canonical" href="https://pdfservices.sistema.site/gerar-pdf-a-partir-de-html-em-csharp">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="theme-color" content="#0b1120">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="PDF Services · CODECYCLE">
+  <meta property="og:title" content="Gerar PDF a partir de HTML em C# (.NET) | PDF Services">
+  <meta property="og:description" content="Como gerar PDF a partir de HTML em C#: compare iText (AGPL), PuppeteerSharp e Playwright e veja o código com HttpClient e ASP.NET Core.">
+  <meta property="og:url" content="https://pdfservices.sistema.site/gerar-pdf-a-partir-de-html-em-csharp">
+  <meta property="og:image" content="https://pdfservices.sistema.site/assets/img/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="article:published_time" content="2026-09-12">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/png" href="../assets/img/logo-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="../assets/css/theme.css">
+  <link rel="stylesheet" href="../assets/css/site.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "TechArticle",
+      "headline": "Gerar PDF a partir de HTML em C#",
+      "description": "Como gerar PDF a partir de HTML em C#: compare iText (AGPL), PuppeteerSharp e Playwright e veja o código com HttpClient e ASP.NET Core.",
+      "inLanguage": "pt-BR",
+      "datePublished": "2026-09-12",
+      "dateModified": "2026-09-12",
+      "image": "https://pdfservices.sistema.site/assets/img/og-image.png",
+      "author": {
+        "@type": "Organization",
+        "name": "CODECYCLE",
+        "url": "https://codecycle.com.br"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "CODECYCLE",
+        "url": "https://codecycle.com.br",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://pdfservices.sistema.site/assets/img/logo-icon.png"
+        }
+      },
+      "mainEntityOfPage": "https://pdfservices.sistema.site/gerar-pdf-a-partir-de-html-em-csharp",
+      "proficiencyLevel": "Beginner",
+      "keywords": "gerar pdf a partir de html c#, html para pdf c#, converter html em pdf .net, asp.net core pdf, httpclient pdf, iText, iText pdfHTML, AGPL, PuppeteerSharp, Playwright"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Início",
+          "item": "https://pdfservices.sistema.site/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Guias",
+          "item": "https://pdfservices.sistema.site/#guias"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "HTML para PDF em C#",
+          "item": "https://pdfservices.sistema.site/gerar-pdf-a-partir-de-html-em-csharp"
+        }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+<body class="site">
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <header id="site-header" class="site-header" data-base="../">
+    <div class="container bar">
+      <a class="brand" href="../"><img src="../assets/img/logo-code.png" alt="CODECYCLE" width="107" height="24"><span class="brand-divider" aria-hidden="true"></span><span class="brand-product">PDF <span>Services</span></span></a>
+      <nav class="site-nav" aria-label="Principal"><a href="../#como-funciona">Como funciona</a><a href="../#preco">Preço</a><a href="../#privacidade">Privacidade</a><a href="../#codigo-aberto">Código aberto</a><a href="../#faq">FAQ</a></nav>
+      <div class="header-actions"><a class="btn btn-ghost desktop-only" href="https://my.pdfservices.sistema.site/login">Entrar</a><a class="btn btn-primary desktop-only" href="../cadastro">Criar conta</a></div>
+    </div>
+  </header>
+
+  <main id="conteudo" class="legal-page has-glow" tabindex="-1">
+    <div class="page-glow grid-bg" aria-hidden="true"></div>
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Trilha de navegação">
+        <ol><li><a href="../">Início</a></li><li><a href="../#guias">Guias</a></li><li aria-current="page">HTML para PDF em C#</li></ol>
+      </nav>
+      <article class="legal guide" aria-labelledby="doc-title">
+        <h1 id="doc-title">Gerar PDF a partir de HTML em C#</h1>
+        <p>Guia · atualizado em 12/09/2026 · 8 min de leitura</p>
+<p class="lead">Faturas, relatórios, contratos e comprovantes: em sistemas .NET é comum precisar <strong>gerar PDF a partir de HTML em C#</strong>. Desenhar o documento em HTML e CSS é mais rápido do que posicionar texto por coordenadas, e o mesmo layout serve para a tela e para o PDF. Este guia compara as opções mais usadas e mostra o código completo, com <code>HttpClient</code> e ASP.NET Core, usando a API do PDF Services.</p>
+<nav aria-label="Sumário">
+  <ol>
+    <li><a href="#opcoes">As opções no .NET</a></li>
+    <li><a href="#quando-usar-api">Quando usar uma API</a></li>
+    <li><a href="#passo-a-passo">Passo a passo com HttpClient</a></li>
+    <li><a href="#aspnet-core">Exemplo em ASP.NET Core</a></li>
+    <li><a href="#css-para-pdf">CSS para PDF</a></li>
+    <li><a href="#erros">Tratamento de erros</a></li>
+    <li><a href="#custos-e-privacidade">Custos e privacidade</a></li>
+  </ol>
+</nav>
+
+<section id="opcoes">
+  <h2>As opções para converter HTML em PDF no .NET</h2>
+  <p>Existem dois caminhos: rodar um conversor dentro da sua aplicação ou chamar um serviço pela rede. As alternativas mais conhecidas:</p>
+  <table>
+    <thead><tr><th>Opção</th><th>Como funciona</th><th>Pontos de atenção</th></tr></thead>
+    <tbody>
+      <tr><td>iText (pdfHTML)</td><td>Biblioteca que converte HTML e CSS direto em PDF, sem navegador.</td><td>Licença AGPL ou comercial: usar dentro de um produto fechado exige avaliar a licença.</td></tr>
+      <tr><td>PuppeteerSharp / Playwright</td><td>Controlam um Chromium headless e "imprimem" a página em PDF.</td><td>Precisam baixar e manter o navegador, consomem bastante memória e complicam containers enxutos e ambientes serverless.</td></tr>
+      <tr><td>wkhtmltopdf (DinkToPdf e similares)</td><td>Wrapper de um executável baseado em WebKit.</td><td>Projeto arquivado desde 2023, com motor de renderização antigo. Evite em projetos novos.</td></tr>
+      <tr><td>API HTTP (PDF Services)</td><td>Você envia o HTML e recebe o PDF na resposta.</td><td>Depende de rede e é cobrado por uso, mas não há nada para instalar ou atualizar no servidor.</td></tr>
+    </tbody>
+  </table>
+  <p>O PDF Services usa o próprio iText pdfHTML por baixo. A diferença é que ele roda como serviço: sua aplicação não carrega a biblioteca nem se preocupa com licença, fontes, memória ou atualizações.</p>
+</section>
+
+<section id="quando-usar-api">
+  <h2>Quando faz sentido usar uma API</h2>
+  <ul>
+    <li>Você publica em <strong>Azure Functions, AWS Lambda ou containers mínimos</strong>, onde instalar um Chromium é caro ou impossível.</li>
+    <li>O volume é variável e você prefere <strong>pagar por PDF</strong> em vez de dimensionar servidores para picos.</li>
+    <li>Você não quer lidar com dependências nativas, fontes do sistema operacional e atualizações de segurança do conversor.</li>
+  </ul>
+  <p>Se você precisa executar JavaScript da página, como gráficos montados no navegador, um navegador headless é a ferramenta certa. Para documentos de negócio montados no servidor, HTML e CSS bastam.</p>
+</section>
+
+<section id="passo-a-passo">
+  <h2>Passo a passo: gerar o PDF com HttpClient</h2>
+  <h3>1. Crie a conta e a chave de API</h3>
+  <p><a href="../cadastro">Cadastre a empresa</a>, confirme o e-mail e crie uma chave em <em>Chaves de API</em> no painel. A chave aparece uma única vez: guarde-a como segredo, por exemplo em variável de ambiente, User Secrets ou Azure Key Vault, nunca no código-fonte.</p>
+  <h3>2. Envie o HTML e salve o PDF</h3>
+  <p>O exemplo abaixo é um app de console do .NET 8 ou superior. O corpo da requisição é o próprio HTML, com <code>Content-Type: text/html; charset=utf-8</code>:</p>
+<div class="code">
+  <div class="code-header"><span class="code-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>Program.cs</span></div>
+<pre><code>using System.Text;
+
+var apiKey = Environment.GetEnvironmentVariable(&quot;PDFSERVICES_API_KEY&quot;)
+    ?? throw new InvalidOperationException(&quot;Defina a variável PDFSERVICES_API_KEY.&quot;);
+
+var html = &quot;&quot;&quot;
+    &lt;!doctype html&gt;
+    &lt;html lang=&quot;pt-BR&quot;&gt;
+    &lt;head&gt;
+      &lt;meta charset=&quot;utf-8&quot;&gt;
+      &lt;style&gt;
+        @page { size: A4; margin: 2cm; }
+        body { font-family: sans-serif; }
+      &lt;/style&gt;
+    &lt;/head&gt;
+    &lt;body&gt;&lt;h1&gt;Olá, PDF!&lt;/h1&gt;&lt;/body&gt;
+    &lt;/html&gt;
+    &quot;&quot;&quot;;
+
+using var http = new HttpClient { BaseAddress = new Uri(&quot;https://api.pdfservices.sistema.site&quot;) };
+http.DefaultRequestHeaders.Add(&quot;X-Api-Key&quot;, apiKey);
+
+using var content = new StringContent(html, Encoding.UTF8, &quot;text/html&quot;);
+using var response = await http.PostAsync(&quot;/v1/html2pdf/html&quot;, content);
+
+if (!response.IsSuccessStatusCode)
+{
+    var erro = await response.Content.ReadAsStringAsync();
+    throw new InvalidOperationException($&quot;Falha {(int)response.StatusCode}: {erro}&quot;);
+}
+
+await File.WriteAllBytesAsync(&quot;documento.pdf&quot;, await response.Content.ReadAsByteArrayAsync());
+Console.WriteLine($&quot;Cobrado: R$ {response.Headers.GetValues(&quot;X-Charged-Amount&quot;).First()}&quot;);</code></pre>
+</div>
+  <p>A resposta traz o PDF em <code>application/pdf</code> e os headers <code>X-Transaction-Id</code>, <code>X-Charged-Amount</code> (valor cobrado) e <code>X-Balance</code> (saldo restante).</p>
+  <h3>3. Se preferir, envie JSON</h3>
+<div class="code">
+  <div class="code-header"><span class="code-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>C#</span></div>
+<pre><code>// O formato json é útil quando o HTML já está em um objeto ou vem de outro serviço.
+using var response = await http.PostAsJsonAsync(&quot;/v1/html2pdf/json&quot;, new { html });</code></pre>
+</div>
+  <div class="callout"><p><strong>Segurança:</strong> chame a API sempre a partir do servidor. Se a chave aparecer em código que roda no navegador ou em um app móvel, qualquer pessoa pode usá-la e consumir seus créditos.</p></div>
+</section>
+
+<section id="aspnet-core">
+  <h2>Exemplo em ASP.NET Core: devolvendo o PDF para o usuário</h2>
+  <p>Em uma API web, registre um <code>HttpClient</code> nomeado com <code>IHttpClientFactory</code> e devolva o PDF com <code>Results.File</code>. A chave fica em <code>appsettings</code> ou, melhor, em User Secrets ou variáveis de ambiente (<code>PdfServices__ApiKey</code>):</p>
+<div class="code">
+  <div class="code-header"><span class="code-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>Program.cs (ASP.NET Core)</span></div>
+<pre><code>using System.Net;
+using System.Text;
+
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddHttpClient(&quot;PdfServices&quot;, client =&gt;
+{
+    client.BaseAddress = new Uri(&quot;https://api.pdfservices.sistema.site&quot;);
+    client.DefaultRequestHeaders.Add(&quot;X-Api-Key&quot;, builder.Configuration[&quot;PdfServices:ApiKey&quot;]);
+});
+
+var app = builder.Build();
+
+app.MapGet(&quot;/faturas/{numero}/pdf&quot;, async (string numero, IHttpClientFactory factory) =&gt;
+{
+    // Todo dado vindo do usuário deve ser codificado antes de entrar no HTML.
+    var html = $&quot;&quot;&quot;
+        &lt;!doctype html&gt;
+        &lt;html lang=&quot;pt-BR&quot;&gt;
+        &lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;/head&gt;
+        &lt;body&gt;&lt;h1&gt;Fatura {WebUtility.HtmlEncode(numero)}&lt;/h1&gt;&lt;/body&gt;
+        &lt;/html&gt;
+        &quot;&quot;&quot;;
+
+    var client = factory.CreateClient(&quot;PdfServices&quot;);
+    using var response = await client.PostAsync(&quot;/v1/html2pdf/html&quot;, new StringContent(html, Encoding.UTF8, &quot;text/html&quot;));
+
+    if (!response.IsSuccessStatusCode)
+    {
+        return Results.Problem($&quot;Falha ao gerar o PDF ({(int)response.StatusCode}).&quot;);
+    }
+
+    var pdf = await response.Content.ReadAsByteArrayAsync();
+    return Results.File(pdf, &quot;application/pdf&quot;, $&quot;fatura-{numero}.pdf&quot;);
+});
+
+app.Run();</code></pre>
+</div>
+  <p>Para documentos maiores, monte o HTML com Razor, por exemplo com uma view renderizada para string ou uma biblioteca de templates. O importante é codificar todo dado vindo do usuário (<code>WebUtility.HtmlEncode</code>) para evitar injeção de HTML no documento.</p>
+</section>
+
+<section id="css-para-pdf">
+  <h2>CSS para PDF: tamanho da página, cabeçalho, rodapé e quebras</h2>
+  <p>O motor de conversão entende CSS de impressão (<em>paged media</em>). É com ele que você controla o documento, sem nada específico de C#:</p>
+<div class="code">
+  <div class="code-header"><span class="code-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>estilo.css (dentro de uma tag &lt;style&gt;)</span></div>
+<pre><code>@page {
+  size: A4;
+  margin: 2.5cm 2cm;
+  @top-center { content: &quot;Relatório mensal&quot;; }
+  @bottom-right { content: &quot;Página &quot; counter(page) &quot; de &quot; counter(pages); }
+}
+
+.nova-pagina { page-break-before: always; }
+
+/* Repete o cabeçalho da tabela em todas as páginas */
+thead { display: table-header-group; }</code></pre>
+</div>
+  <ul>
+    <li><strong>Tamanho e margens:</strong> <code>@page { size: A4; }</code>, <code>A4 landscape</code>, <code>Letter</code> ou medidas como <code>21cm 29.7cm</code>.</li>
+    <li><strong>Cabeçalho e rodapé:</strong> as caixas de margem (<code>@top-center</code>, <code>@bottom-right</code> etc.) com <code>counter(page)</code> e <code>counter(pages)</code> geram o "Página 1 de 3".</li>
+    <li><strong>Quebras:</strong> <code>page-break-before</code>, <code>page-break-after</code> e <code>page-break-inside: avoid</code> para não cortar blocos ao meio.</li>
+    <li><strong>Imagens:</strong> embutidas como <code>data:</code> URI ou por URL <strong>https</strong> pública, em JPG ou PNG.</li>
+    <li><strong>Fontes:</strong> as padrão já cobrem acentos; para a sua fonte, use <code>@font-face</code> com <code>data:</code> URI. Fontes por URL, como as do Google Fonts, não são baixadas.</li>
+    <li><strong>JavaScript não é executado:</strong> monte o HTML final no servidor. Para gráficos, gere uma imagem PNG antes.</li>
+  </ul>
+</section>
+
+<section id="erros">
+  <h2>Tratamento de erros</h2>
+  <p>Quando algo dá errado, a API responde com um JSON <code>{"error": "...", "message": "..."}</code>. Os casos que valem tratar no código:</p>
+  <table>
+    <thead><tr><th>HTTP</th><th>Código</th><th>O que fazer</th></tr></thead>
+    <tbody>
+      <tr><td>401</td><td><code>invalid_api_key</code></td><td>Confira a chave configurada; ela pode ter sido excluída no painel.</td></tr>
+      <tr><td>402</td><td><code>insufficient_balance</code></td><td>Saldo insuficiente: adicione créditos. Não adianta repetir a chamada.</td></tr>
+      <tr><td>413</td><td><code>payload_too_large</code></td><td>O corpo passou de 1 MB. Reduza imagens embutidas ou use URLs https.</td></tr>
+      <tr><td>422</td><td><code>conversion_failed</code></td><td>O HTML não pôde ser convertido. Revise o documento; a falha não é cobrada.</td></tr>
+      <tr><td>503</td><td><code>busy</code></td><td>Muitas chamadas simultâneas na mesma conta: repita com espera crescente.</td></tr>
+    </tbody>
+  </table>
+  <p>No .NET, o pacote <code>Microsoft.Extensions.Http.Resilience</code> (ou o Polly) resolve as novas tentativas no próprio <code>HttpClient</code>. Limite as tentativas ao status 503 e a falhas de rede: repetir 401, 402 ou 422 não muda o resultado.</p>
+</section>
+
+<section id="custos-e-privacidade">
+  <h2>Custos e privacidade</h2>
+  <p>O PDF Services cobra <strong>R$ 0,001 por conversão bem-sucedida</strong>, com créditos pré-pagos e sem mensalidade: mil PDFs custam R$ 1,00. Conversões com erro não são cobradas.</p>
+  <p>O HTML enviado e o PDF gerado são processados só em memória e <strong>nunca são armazenados nem registrados em logs</strong>. Ficam registrados apenas metadados da transação, como data, tamanho e valor cobrado. Detalhes na <a href="../privacidade">Política de Privacidade</a>. Todo o código do serviço é aberto, sob a licença AGPL v3, e pode ser auditado no <a href="https://github.com/Leitonez/pdfservices">GitHub</a>.</p>
+</section>
+
+
+<div class="guide-cta">
+  <h2>Gere seu primeiro PDF agora</h2>
+  <p>Crie a conta da sua empresa, gere uma chave no painel e rode o exemplo acima. Pelo painel também dá para testar a conversão antes de escrever uma linha de código.</p>
+  <div class="cta-row">
+    <a class="btn btn-primary" href="../cadastro">Criar conta</a>
+    <a class="btn btn-ghost" href="https://my.pdfservices.sistema.site/login">Já tenho conta · Entrar</a>
+  </div>
+</div>
+
+<section id="outros-guias" class="guide-related">
+  <h2>Outros guias</h2>
+  <ul>
+    <li><a href="../gerar-pdf-a-partir-de-html-em-nodejs">Gerar PDF a partir de HTML em Node.js</a></li>
+    <li><a href="../gerar-pdf-a-partir-de-html-em-python">Gerar PDF a partir de HTML em Python</a></li>
+    <li><a href="../#integracao">Referência rápida da API, com exemplos em PHP e cURL</a></li>
+  </ul>
+</section>
+      </article>
+    </div>
+  </main>
+
+  <footer id="site-footer" class="site-footer" data-base="../">
+    <div class="container">
+      <p class="muted"><a href="../gerar-pdf-a-partir-de-html-em-csharp">HTML para PDF em C#</a> · <a href="../gerar-pdf-a-partir-de-html-em-nodejs">HTML para PDF em Node.js</a> · <a href="../gerar-pdf-a-partir-de-html-em-python">HTML para PDF em Python</a></p>
+      <p class="muted"><a href="../termos">Termos de Uso</a> · <a href="../privacidade">Política de Privacidade</a> · <a href="https://github.com/Leitonez/pdfservices">Código-fonte (GitHub)</a> · © CODECYCLE · Software livre sob AGPL v3</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@3.5.42/dist/vue.global.prod.js"></script>
+  <script type="module" src="../assets/js/pages/static.js"></script>
+</body>
+</html>

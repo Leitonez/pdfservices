@@ -1619,3 +1619,93 @@ body.modal-open {
   .modal-footer { padding: 8px 18px 18px; }
   .modal-footer .btn { flex: 1; }
 }
+
+/* ------------------------------------------------------------------ Executar Teste */
+
+.test-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+  gap: 0 20px;
+}
+
+.test-key {
+  display: flex;
+  gap: 8px;
+}
+
+.test-key input {
+  flex: 1;
+  min-width: 0;
+  font-family: var(--font-mono);
+}
+
+.test-label-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.field textarea.test-editor {
+  min-height: 300px;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  line-height: 1.6;
+  resize: vertical;
+  tab-size: 2;
+  white-space: pre;
+  overflow: auto;
+}
+
+.test-editor-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.test-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.test-result-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.test-result-head .card-title:focus {
+  outline: none;
+}
+
+.test-preview {
+  display: block;
+  width: 100%;
+  height: 70vh;
+  min-height: 420px;
+  margin-top: 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: #fff;
+}
+
+.test-curl summary {
+  cursor: pointer;
+}
+
+.test-curl[open] summary {
+  margin-bottom: 8px;
+}
+
+@media (max-width: 860px) {
+  .test-grid { grid-template-columns: minmax(0, 1fr); }
+  .test-preview { height: 60vh; min-height: 320px; }
+}

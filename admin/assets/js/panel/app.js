@@ -8,6 +8,7 @@ import { store, refreshAccount, loadCapabilitiesQuietly, refreshAccountQuietly }
 import { UsageView } from './views/usage.js';
 import { KeysView } from './views/keys.js';
 import { DocsView } from './views/docs.js';
+import { TestView } from './views/test.js';
 import { AccountView } from './views/account.js';
 import { CreditsView } from './views/credits.js';
 
@@ -17,6 +18,7 @@ const ROUTES = [
   { path: '/consumo', label: 'Consumo', icon: 'chart', component: markRaw(UsageView) },
   { path: '/chaves', label: 'Chaves de API', icon: 'key', component: markRaw(KeysView) },
   { path: '/documentacao', label: 'Documentação', icon: 'book', component: markRaw(DocsView) },
+  { path: '/teste', label: 'Executar Teste', icon: 'play', component: markRaw(TestView) },
   { path: '/conta', label: 'Minha conta', icon: 'user', component: markRaw(AccountView) },
   { path: '/creditos', label: 'Comprar créditos', icon: 'card', component: markRaw(CreditsView), badge: 'Em breve' }
 ];

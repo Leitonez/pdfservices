@@ -29,7 +29,7 @@ public class Program
         FunctionsApplicationBuilder builder = FunctionsApplication.CreateBuilder(args);
 
         builder.ConfigureFunctionsWebApplication();
-        builder.UseMiddleware<SourceCodeHeaderMiddleware>();
+        builder.UseMiddleware<ResponseHeadersMiddleware>();
 
         if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("APPLICATIONINSIGHTS_CONNECTION_STRING")))
         {

@@ -134,7 +134,7 @@ if (!redirectIfLoggedIn(next)) {
           <div class="field" :class="{ 'has-error': fieldErrors.password }">
             <div class="label-row">
               <label for="password">Senha</label>
-              <a href="../esqueci-senha/" class="small">Esqueci minha senha</a>
+              <a href="../esqueci-senha" class="small">Esqueci minha senha</a>
             </div>
             <password-input ref="password" id="password" v-model="password" autocomplete="current-password" required
               :aria-invalid="fieldErrors.password ? 'true' : 'false'" :aria-describedby="fieldErrors.password ? 'password-error' : null"></password-input>
@@ -150,7 +150,7 @@ if (!redirectIfLoggedIn(next)) {
         </form>
 
         <p class="auth-alt">
-          Ainda não tem conta? <a :href="config.websiteUrl + '/cadastro/'">Criar conta</a>
+          Ainda não tem conta? <a :href="config.websiteUrl + '/cadastro'">Criar conta</a>
         </p>
       </auth-shell>`
   }).mount('#app');

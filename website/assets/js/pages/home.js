@@ -27,7 +27,7 @@ createApp({
   },
   computed: {
     loginUrl() {
-      return config.adminUrl + '/login/';
+      return config.adminUrl + '/login';
     },
     priceLabel() {
       return formatMoney(this.price);

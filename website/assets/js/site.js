@@ -43,10 +43,10 @@ const SiteHeader = {
       return NAV.map((item) => ({ ...item, href: this.base + '#' + item.id }));
     },
     signupHref() {
-      return this.base + 'cadastro/';
+      return this.base + 'cadastro';
     },
     loginUrl() {
-      return config.adminUrl + '/login/';
+      return config.adminUrl + '/login';
     },
     sourceUrl() {
       return config.sourceCodeUrl;
@@ -120,7 +120,7 @@ const SiteFooter = {
       return this.base || './';
     },
     loginUrl() {
-      return config.adminUrl + '/login/';
+      return config.adminUrl + '/login';
     }
   },
   template: `
@@ -142,7 +142,7 @@ const SiteFooter = {
         <nav class="footer-col" aria-labelledby="footer-conta">
           <h2 id="footer-conta">Conta</h2>
           <ul>
-            <li><a :href="base + 'cadastro/'">Criar conta</a></li>
+            <li><a :href="base + 'cadastro'">Criar conta</a></li>
             <li><a :href="loginUrl">Entrar</a></li>
             <li><a :href="config.adminUrl">Painel do cliente</a></li>
             <li><a :href="config.contactUrl">Fale com a CODECYCLE</a></li>
@@ -151,8 +151,8 @@ const SiteFooter = {
         <nav class="footer-col" aria-labelledby="footer-legal">
           <h2 id="footer-legal">Legal e código</h2>
           <ul>
-            <li><a :href="base + 'termos/'">Termos de Uso</a></li>
-            <li><a :href="base + 'privacidade/'">Política de Privacidade</a></li>
+            <li><a :href="base + 'termos'">Termos de Uso</a></li>
+            <li><a :href="base + 'privacidade'">Política de Privacidade</a></li>
             <li><a :href="config.sourceCodeUrl" target="_blank" rel="noopener">Código-fonte (GitHub)</a></li>
             <li><a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank" rel="noopener">Licença GNU AGPL v3</a></li>
           </ul>

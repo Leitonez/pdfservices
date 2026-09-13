@@ -126,8 +126,8 @@ export const AppFooter = {
         <a :href="config.sourceCodeUrl" target="_blank" rel="noopener">código-fonte</a>
       </p>
       <nav class="app-footer-links" aria-label="Documentos legais">
-        <a :href="config.websiteUrl + '/termos/'">Termos de Uso</a>
-        <a :href="config.websiteUrl + '/privacidade/'">Privacidade</a>
+        <a :href="config.websiteUrl + '/termos'">Termos de Uso</a>
+        <a :href="config.websiteUrl + '/privacidade'">Privacidade</a>
         <a :href="config.companyUrl" target="_blank" rel="noopener">© {{ year }} CODECYCLE</a>
       </nav>
     </footer>`

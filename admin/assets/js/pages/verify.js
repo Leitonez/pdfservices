@@ -44,7 +44,7 @@ if (token || !redirectIfLoggedIn()) {
             <app-icon name="check" class="alert-icon"></app-icon>
             <div>{{ message }}</div>
           </div>
-          <a href="../login/" class="btn btn-primary btn-block btn-lg">Entrar</a>
+          <a href="../login" class="btn btn-primary btn-block btn-lg">Entrar</a>
         </template>
 
         <template v-else>
@@ -56,7 +56,7 @@ if (token || !redirectIfLoggedIn()) {
             Links de confirmação expiram e só podem ser usados uma vez. Tente entrar: se o e-mail ainda não estiver confirmado,
             a tela de login oferece a opção de receber um novo link.
           </p>
-          <a href="../login/" class="btn btn-ghost btn-block">Ir para o login</a>
+          <a href="../login" class="btn btn-ghost btn-block">Ir para o login</a>
         </template>
       </auth-shell>`
   }).mount('#app');

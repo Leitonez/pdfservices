@@ -262,7 +262,7 @@ export const DocsView = {
               <li>Guardamos somente metadados da transação: data e hora, capacidade, chave usada, valor, saldo, tamanhos em bytes e duração.</li>
               <li>Registros de acesso (IP e data/hora) são mantidos por 6 meses, como exige o Marco Civil da Internet.</li>
             </ul>
-            <p>Detalhes na <a :href="config.websiteUrl + '/privacidade/'">Política de Privacidade</a>.</p>
+            <p>Detalhes na <a :href="config.websiteUrl + '/privacidade'">Política de Privacidade</a>.</p>
           </section>
 
           <section id="doc-codigo-aberto" class="doc-section">

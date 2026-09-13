@@ -400,7 +400,7 @@ export const UsageView = {
             apenas na memória durante a conversão. Este relatório usa somente metadados de cada transação: data e hora,
             capacidade, chave usada, valor, saldo, tamanhos em bytes e duração. Registros de acesso (IP e data/hora) são
             guardados por 6 meses, como exige o Marco Civil da Internet.
-            <a :href="config.websiteUrl + '/privacidade/'">Política de Privacidade</a>.
+            <a :href="config.websiteUrl + '/privacidade'">Política de Privacidade</a>.
           </p>
         </aside>
       </div>

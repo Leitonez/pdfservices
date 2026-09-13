@@ -5,14 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Criar conta · PDF Services</title>
   <meta name="description" content="Crie a conta da sua empresa no PDF Services: API de HTML para PDF com iText, pague por uso, sem armazenar seus documentos e com código aberto (AGPL v3).">
-  <link rel="canonical" href="https://pdfservices.sistema.site/cadastro/">
+  <link rel="canonical" href="https://pdfservices.sistema.site/cadastro">
   <meta name="theme-color" content="#0b1120">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="pt_BR">
   <meta property="og:site_name" content="PDF Services · CODECYCLE">
   <meta property="og:title" content="Criar conta · PDF Services">
   <meta property="og:description" content="Cadastre sua empresa e comece a converter HTML em PDF pagando só pelo que usar.">
-  <meta property="og:url" content="https://pdfservices.sistema.site/cadastro/">
+  <meta property="og:url" content="https://pdfservices.sistema.site/cadastro">
   <meta property="og:image" content="https://pdfservices.sistema.site/assets/img/logo-icon.png">
   <link rel="icon" type="image/png" href="../assets/img/logo-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -127,7 +127,7 @@
               <input id="f-terms" v-model="form.acceptTerms" type="checkbox" required
                      :aria-invalid="errors.acceptTerms ? 'true' : 'false'" :aria-describedby="errors.acceptTerms ? 'e-terms' : null"
                      @change="revalidate('acceptTerms')">
-              <span>Li e aceito os <a href="../termos/" target="_blank" rel="noopener">Termos de Uso<span class="sr-only"> (abre em nova aba)</span></a> e a <a href="../privacidade/" target="_blank" rel="noopener">Política de Privacidade<span class="sr-only"> (abre em nova aba)</span></a>.</span>
+              <span>Li e aceito os <a href="../termos" target="_blank" rel="noopener">Termos de Uso<span class="sr-only"> (abre em nova aba)</span></a> e a <a href="../privacidade" target="_blank" rel="noopener">Política de Privacidade<span class="sr-only"> (abre em nova aba)</span></a>.</span>
             </label>
             <span v-if="errors.acceptTerms" id="e-terms" class="field-error">{{ errors.acceptTerms }}</span>
           </div>
@@ -197,7 +197,7 @@
           <span class="icon-tile cyan"><svg class="i" aria-hidden="true"><use href="#i-shield"/></svg></span>
           <div>
             <h3>Seus documentos não ficam aqui</h3>
-            <p>O HTML e o PDF são processados só em memória e nunca são armazenados nem registrados em logs. <a href="../privacidade/">Política de Privacidade</a></p>
+            <p>O HTML e o PDF são processados só em memória e nunca são armazenados nem registrados em logs. <a href="../privacidade">Política de Privacidade</a></p>
           </div>
         </div>
         <div class="card mini-card">
@@ -216,7 +216,7 @@
 
   <footer id="site-footer" class="site-footer" data-base="../">
     <div class="container">
-      <p class="muted"><a href="../termos/">Termos de Uso</a> · <a href="../privacidade/">Política de Privacidade</a> · <a href="https://github.com/Leitonez/pdfservices">Código-fonte (GitHub)</a> · © CODECYCLE · Software livre sob AGPL v3</p>
+      <p class="muted"><a href="../termos">Termos de Uso</a> · <a href="../privacidade">Política de Privacidade</a> · <a href="https://github.com/Leitonez/pdfservices">Código-fonte (GitHub)</a> · © CODECYCLE · Software livre sob AGPL v3</p>
     </div>
   </footer>
 

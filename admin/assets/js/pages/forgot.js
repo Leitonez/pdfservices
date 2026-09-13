@@ -52,7 +52,7 @@ if (!redirectIfLoggedIn()) {
             <div>{{ message }}</div>
           </div>
           <p class="muted small">O link é válido por tempo limitado. Confira também a caixa de spam.</p>
-          <a href="../login/" class="btn btn-ghost btn-block">Voltar para o login</a>
+          <a href="../login" class="btn btn-ghost btn-block">Voltar para o login</a>
         </template>
 
         <form v-else @submit.prevent="submit" novalidate>
@@ -70,7 +70,7 @@ if (!redirectIfLoggedIn()) {
           </button>
         </form>
 
-        <p v-if="!message" class="auth-alt"><a href="../login/">Voltar para o login</a></p>
+        <p v-if="!message" class="auth-alt"><a href="../login">Voltar para o login</a></p>
       </auth-shell>`
   }).mount('#app');
 }

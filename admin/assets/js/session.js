@@ -10,7 +10,7 @@ const EXPIRY_MARGIN_MS = 10 * 1000;
 export const panelUrl = new URL('../../', import.meta.url).href;
 
 /** Absolute URL of the login page. */
-export const loginUrl = new URL('../../login/', import.meta.url).href;
+export const loginUrl = new URL('../../login', import.meta.url).href;
 
 const DEFAULT_ROUTE = '#/consumo';
 

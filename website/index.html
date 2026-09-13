@@ -60,7 +60,7 @@
           <h1 id="hero-title"><span class="line">HTML entra.</span> <span class="line grad">PDF sai.</span></h1>
           <p class="lead">Uma API HTTP simples que transforma o seu HTML em PDF com o motor <strong>iText pdfHTML</strong>. Você paga só pelas conversões bem-sucedidas, seus documentos nunca são armazenados e todo o código é aberto.</p>
           <div class="cta-row">
-            <a class="btn btn-primary btn-lg" href="cadastro/">Criar conta <svg class="i i-sm" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            <a class="btn btn-primary btn-lg" href="cadastro">Criar conta <svg class="i i-sm" aria-hidden="true"><use href="#i-arrow"/></svg></a>
             <a class="btn btn-ghost btn-lg" :href="config.sourceCodeUrl" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-github"/></svg> Ver código no GitHub</a>
           </div>
           <ul class="hero-points">
@@ -321,7 +321,7 @@ file_put_contents(<span class="s">'documento.pdf'</span>, $body);</code></pre>
               <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Saldo e consumo detalhado por chave de API no painel</li>
               <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Alterações de preço avisadas com antecedência no site</li>
             </ul>
-            <a class="btn btn-primary btn-lg btn-block" href="cadastro/">Criar conta</a>
+            <a class="btn btn-primary btn-lg btn-block" href="cadastro">Criar conta</a>
             <p class="price-note">Novas contas não recebem créditos gratuitos.</p>
           </div>
 
@@ -386,7 +386,7 @@ file_put_contents(<span class="s">'documento.pdf'</span>, $body);</code></pre>
 
           <div class="privacy-foot">
             <p>Consequência prática: como não guardamos o conteúdo, não conseguimos recuperar um documento já convertido. Mantenha suas próprias cópias.</p>
-            <a class="btn btn-ghost" href="privacidade/">Ler a Política de Privacidade</a>
+            <a class="btn btn-ghost" href="privacidade">Ler a Política de Privacidade</a>
           </div>
         </div>
       </div>
@@ -507,7 +507,7 @@ file_put_contents(<span class="s">'documento.pdf'</span>, $body);</code></pre>
 
           <div class="legal-note" role="note">
             <svg class="i" aria-hidden="true"><use href="#i-scale"/></svg>
-            <p><strong>Não é aconselhamento jurídico.</strong> A AGPL tem implicações próprias; recomendamos que sua empresa as avalie com a assessoria jurídica. A <a href="termos/#codigo-aberto-e-propriedade-intelectual">seção 10 dos Termos de Uso</a> trata da relação entre a licença e o serviço hospedado.</p>
+            <p><strong>Não é aconselhamento jurídico.</strong> A AGPL tem implicações próprias; recomendamos que sua empresa as avalie com a assessoria jurídica. A <a href="termos#codigo-aberto-e-propriedade-intelectual">seção 10 dos Termos de Uso</a> trata da relação entre a licença e o serviço hospedado.</p>
           </div>
         </div>
       </div>
@@ -560,13 +560,13 @@ file_put_contents(<span class="s">'documento.pdf'</span>, $body);</code></pre>
           <details>
             <summary>Vocês guardam o HTML ou o PDF?</summary>
             <div class="answer">
-              <p>Não. Os dois são processados só em memória e nunca são armazenados nem registrados em logs. Guardamos apenas metadados da transação (data/hora, capacidade, chave usada, valor, saldo, tamanhos em bytes e duração) e registros de acesso (IP e data/hora) por 6 meses, como exige o Marco Civil da Internet. Por isso, não conseguimos recuperar um documento já convertido. Detalhes na <a href="privacidade/">Política de Privacidade</a>.</p>
+              <p>Não. Os dois são processados só em memória e nunca são armazenados nem registrados em logs. Guardamos apenas metadados da transação (data/hora, capacidade, chave usada, valor, saldo, tamanhos em bytes e duração) e registros de acesso (IP e data/hora) por 6 meses, como exige o Marco Civil da Internet. Por isso, não conseguimos recuperar um documento já convertido. Detalhes na <a href="privacidade">Política de Privacidade</a>.</p>
             </div>
           </details>
           <details>
             <summary>O que a licença AGPL significa para a minha empresa?</summary>
             <div class="answer">
-              <p>O código do PDF Services e a biblioteca iText são licenciados sob a GNU AGPL v3. A licença rege o código-fonte do software (uso, modificação e redistribuição), e a contratação do serviço hospedado é regida pelos <a href="termos/">Termos de Uso</a>. Os PDFs gerados trazem essa identificação no metadado “Producer”. Não prestamos aconselhamento jurídico: recomendamos que sua empresa avalie as implicações da AGPL com a assessoria jurídica.</p>
+              <p>O código do PDF Services e a biblioteca iText são licenciados sob a GNU AGPL v3. A licença rege o código-fonte do software (uso, modificação e redistribuição), e a contratação do serviço hospedado é regida pelos <a href="termos">Termos de Uso</a>. Os PDFs gerados trazem essa identificação no metadado “Producer”. Não prestamos aconselhamento jurídico: recomendamos que sua empresa avalie as implicações da AGPL com a assessoria jurídica.</p>
             </div>
           </details>
           <details>
@@ -593,7 +593,7 @@ file_put_contents(<span class="s">'documento.pdf'</span>, $body);</code></pre>
           <h2 id="cta-title">Pronto para gerar seu primeiro PDF?</h2>
           <p>Crie a conta da sua empresa, gere uma chave de API e converta HTML em PDF com uma única requisição.</p>
           <div class="cta-row">
-            <a class="btn btn-primary btn-lg" href="cadastro/">Criar conta <svg class="i i-sm" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            <a class="btn btn-primary btn-lg" href="cadastro">Criar conta <svg class="i i-sm" aria-hidden="true"><use href="#i-arrow"/></svg></a>
             <a class="btn btn-ghost btn-lg" :href="loginUrl">Já tenho conta · Entrar</a>
           </div>
         </div>
@@ -603,7 +603,7 @@ file_put_contents(<span class="s">'documento.pdf'</span>, $body);</code></pre>
 
   <footer id="site-footer" class="site-footer" data-base="">
     <div class="container">
-      <p class="muted"><a href="termos/">Termos de Uso</a> · <a href="privacidade/">Política de Privacidade</a> · <a href="https://github.com/Leitonez/pdfservices">Código-fonte (GitHub)</a> · © CODECYCLE · Software livre sob AGPL v3</p>
+      <p class="muted"><a href="termos">Termos de Uso</a> · <a href="privacidade">Política de Privacidade</a> · <a href="https://github.com/Leitonez/pdfservices">Código-fonte (GitHub)</a> · © CODECYCLE · Software livre sob AGPL v3</p>
     </div>
   </footer>
 

@@ -16,7 +16,7 @@ public class EmailTemplates
 
     public EmailMessage EmailVerification(string to, string name, string token, int validHours)
     {
-        string link = _urls.AdminUrl.TrimEnd('/') + "/verificar-email/#token=" + token;
+        string link = _urls.AdminUrl.TrimEnd('/') + "/verificar-email#token=" + token;
         string greeting = Greeting(name);
         return new EmailMessage
         {
@@ -37,7 +37,7 @@ public class EmailTemplates
 
     public EmailMessage PasswordReset(string to, string name, string token, int validMinutes)
     {
-        string link = _urls.AdminUrl.TrimEnd('/') + "/redefinir-senha/#token=" + token;
+        string link = _urls.AdminUrl.TrimEnd('/') + "/redefinir-senha#token=" + token;
         string greeting = Greeting(name);
         return new EmailMessage
         {
@@ -58,7 +58,7 @@ public class EmailTemplates
 
     public EmailMessage PasswordChanged(string to, string name)
     {
-        string link = _urls.AdminUrl.TrimEnd('/') + "/esqueci-senha/";
+        string link = _urls.AdminUrl.TrimEnd('/') + "/esqueci-senha";
         string greeting = Greeting(name);
         return new EmailMessage
         {
@@ -77,8 +77,8 @@ public class EmailTemplates
 
     public EmailMessage SignupWithExistingEmail(string to)
     {
-        string login = _urls.AdminUrl.TrimEnd('/') + "/login/";
-        string forgot = _urls.AdminUrl.TrimEnd('/') + "/esqueci-senha/";
+        string login = _urls.AdminUrl.TrimEnd('/') + "/login";
+        string forgot = _urls.AdminUrl.TrimEnd('/') + "/esqueci-senha";
         return new EmailMessage
         {
             To = to,

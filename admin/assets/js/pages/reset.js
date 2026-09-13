@@ -74,8 +74,8 @@ if (token || !redirectIfLoggedIn()) {
             <app-icon name="alert" class="alert-icon"></app-icon>
             <div>Link inválido ou incompleto. Abra o link exatamente como recebido no e-mail ou solicite uma nova redefinição.</div>
           </div>
-          <a href="../esqueci-senha/" class="btn btn-primary btn-block">Solicitar novo link</a>
-          <p class="auth-alt"><a href="../login/">Voltar para o login</a></p>
+          <a href="../esqueci-senha" class="btn btn-primary btn-block">Solicitar novo link</a>
+          <p class="auth-alt"><a href="../login">Voltar para o login</a></p>
         </template>
 
         <template v-else-if="message">
@@ -83,7 +83,7 @@ if (token || !redirectIfLoggedIn()) {
             <app-icon name="check" class="alert-icon"></app-icon>
             <div>{{ message }}</div>
           </div>
-          <a href="../login/" class="btn btn-primary btn-block btn-lg">Ir para o login</a>
+          <a href="../login" class="btn btn-primary btn-block btn-lg">Ir para o login</a>
         </template>
 
         <template v-else>
@@ -91,7 +91,7 @@ if (token || !redirectIfLoggedIn()) {
           <error-alert :message="error">
             {{ error }}
             <template v-if="errorCode === 'invalid_token'">
-              <br><a href="../esqueci-senha/">Solicitar um novo link</a>
+              <br><a href="../esqueci-senha">Solicitar um novo link</a>
             </template>
           </error-alert>
           <form @submit.prevent="submit" novalidate>
@@ -113,7 +113,7 @@ if (token || !redirectIfLoggedIn()) {
               {{ busy ? 'Salvando…' : 'Salvar nova senha' }}
             </button>
           </form>
-          <p class="auth-alt"><a href="../login/">Voltar para o login</a></p>
+          <p class="auth-alt"><a href="../login">Voltar para o login</a></p>
         </template>
       </auth-shell>`
   }).mount('#app');

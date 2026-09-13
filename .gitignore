@@ -7,6 +7,7 @@ local.settings.json
 
 # Azure / Visual Studio publish profiles and connected services
 **/Properties/PublishProfiles/
+**/Properties/ServiceDependencies/
 *.pubxml
 *.pubxml.user
 **/Properties/serviceDependencies*.json

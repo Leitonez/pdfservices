@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Azure.Cosmos;
 using Microsoft.Extensions.Logging;
 
 namespace PdfServices.API.Infrastructure;
@@ -23,10 +24,16 @@ public static class ApiHandler
             logger.LogInformation("Request cancelled by the client.");
             return new StatusCodeResult(499);
         }
+        catch (CosmosException ex)
+        {
+            logger.LogError(ex, "Cosmos DB request failed: HTTP {StatusCode}/{SubStatusCode}.", (int)ex.StatusCode, ex.SubStatusCode);
+            return ApiResults.Error(500, "internal_error", "Ocorreu um erro inesperado. Tente novamente em instantes.");
+        }
         catch (Exception ex)
         {
-            // Only the exception type is logged: messages may echo parts of customer content.
-            logger.LogError("Unhandled {ExceptionType} at {StackTrace}", ex.GetType().FullName, ex.StackTrace);
+            // Safe to log in full: html2pdf conversion failures (whose messages could echo customer content)
+            // are caught inside Html2PdfFunction and never reach this handler.
+            logger.LogError(ex, "Unhandled {ExceptionType}.", ex.GetType().FullName);
             return ApiResults.Error(500, "internal_error", "Ocorreu um erro inesperado. Tente novamente em instantes.");
         }
     }

@@ -1,7 +1,12 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
 using iText.Html2pdf;
 using iText.Kernel.Pdf;
+using iText.StyledXmlParser.Jsoup;
+using iText.StyledXmlParser.Jsoup.Nodes;
 using Microsoft.Extensions.Options;
 using PdfServices.API.Configuration;
 
@@ -22,9 +27,25 @@ public class HtmlToPdfConverter
         _options = options.Value;
     }
 
-    public ConversionResult Convert(string html)
+    /// <summary>
+    /// Fetches the document's &lt;img src&gt; images ahead of layout (pdfHTML asks for resources one at a time,
+    /// synchronously), then converts. Resources pdfHTML asks for later are fetched on demand within the same limits.
+    /// </summary>
+    public async Task<ConversionResult> ConvertAsync(string html, Html2PdfLimits limits)
     {
-        SafeImageResourceRetriever retriever = new SafeImageResourceRetriever(_fetcher, _options);
+        using (SafeImageResourceRetriever retriever = new SafeImageResourceRetriever(_fetcher, _options, limits))
+        {
+            if (_options.PrefetchConcurrency > 0)
+            {
+                await PrefetchImagesAsync(html, retriever);
+            }
+
+            return await Task.Run(() => Convert(html, retriever));
+        }
+    }
+
+    private ConversionResult Convert(string html, SafeImageResourceRetriever retriever)
+    {
         ConverterProperties properties = new ConverterProperties();
         properties.SetResourceRetriever(retriever);
 
@@ -59,9 +80,66 @@ public class HtmlToPdfConverter
             {
                 Pdf = output.ToArray(),
                 ExternalImages = retriever.FetchedCount,
-                BlockedResources = retriever.BlockedCount
+                BlockedResources = retriever.BlockedCount,
+                FetchBudgetExhausted = retriever.BudgetExhausted
             };
         }
+    }
+
+    /// <summary>
+    /// Requests the distinct https &lt;img src&gt; URLs in document order, a few at a time. Each request takes its
+    /// slot of the image limit before the next one starts, so when there are too many images the first ones win.
+    /// </summary>
+    private async Task PrefetchImagesAsync(string html, SafeImageResourceRetriever retriever)
+    {
+        List<Uri> urls = FindImageUrls(html);
+        if (urls.Count == 0)
+        {
+            return;
+        }
+
+        List<Task> pending = new List<Task>();
+        using (SemaphoreSlim concurrency = new SemaphoreSlim(_options.PrefetchConcurrency))
+        {
+            foreach (Uri url in urls)
+            {
+                await concurrency.WaitAsync();
+                pending.Add(PrefetchAsync(url, retriever, concurrency));
+            }
+
+            await Task.WhenAll(pending);
+        }
+    }
+
+    private static async Task PrefetchAsync(Uri url, SafeImageResourceRetriever retriever, SemaphoreSlim concurrency)
+    {
+        try
+        {
+            await retriever.GetOrFetchAsync(url);
+        }
+        finally
+        {
+            concurrency.Release();
+        }
+    }
+
+    private static List<Uri> FindImageUrls(string html)
+    {
+        List<Uri> urls = new List<Uri>();
+        HashSet<string> seen = new HashSet<string>(StringComparer.Ordinal);
+        Document document = Jsoup.Parse(html);
+        foreach (Element image in document.Select("img[src]"))
+        {
+            // Only URLs the retriever would fetch: data: URIs, relative paths and refused schemes are left to pdfHTML.
+            if (Uri.TryCreate(image.Attr("src").Trim(), UriKind.Absolute, out Uri url)
+                && ExternalImageFetcher.IsAllowedUrl(url)
+                && seen.Add(url.AbsoluteUri))
+            {
+                urls.Add(url);
+            }
+        }
+
+        return urls;
     }
 
     public class ConversionResult
@@ -71,5 +149,7 @@ public class HtmlToPdfConverter
         public int ExternalImages { get; set; }
 
         public int BlockedResources { get; set; }
+
+        public bool FetchBudgetExhausted { get; set; }
     }
 }

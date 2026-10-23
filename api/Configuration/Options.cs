@@ -93,6 +93,12 @@ public class Html2PdfOptions
 
     public int ExternalRequestTimeoutSeconds { get; set; } = 10;
 
+    /// <summary>Wall-clock budget for all external fetches of one conversion, counted from its start.</summary>
+    public int MaxTotalFetchSeconds { get; set; } = 60;
+
+    /// <summary>How many &lt;img src&gt; images of one conversion are fetched at once before layout. 0 disables the prefetch.</summary>
+    public int PrefetchConcurrency { get; set; } = 4;
+
     /// <summary>Written to the PDF "Producer" property. iText (AGPL) appends its own identification to it.</summary>
     public string Producer { get; set; } = "CodeCycle AGPL PDF Services (https://pdfservices.sistema.site)";
 }

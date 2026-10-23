@@ -57,16 +57,20 @@ public class ExternalImageFetcher
             && !string.IsNullOrEmpty(url.Host);
     }
 
-    /// <summary>Returns the response bytes, or null when the URL is not allowed, fails, or exceeds <paramref name="maxBytes"/>.</summary>
-    public async Task<byte[]> FetchAsync(Uri url, int maxBytes)
+    /// <summary>
+    /// Returns the response bytes, or null when the URL is not allowed, fails, exceeds <paramref name="maxBytes"/>,
+    /// times out or is cancelled by <paramref name="cancellationToken"/>.
+    /// </summary>
+    public async Task<byte[]> FetchAsync(Uri url, int maxBytes, CancellationToken cancellationToken)
     {
         if (!IsAllowedUrl(url) || maxBytes <= 0)
         {
             return null;
         }
 
-        using (CancellationTokenSource cts = new CancellationTokenSource(_timeout))
+        using (CancellationTokenSource cts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken))
         {
+            cts.CancelAfter(_timeout);
             try
             {
                 using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, url))

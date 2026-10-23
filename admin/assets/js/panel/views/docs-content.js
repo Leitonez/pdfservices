@@ -165,7 +165,7 @@ export const RESPONSE_HEADERS = [
   { name: 'X-Transaction-Id', example: '8f3c…', description: 'Identificador da transação, o mesmo que aparece no extrato do painel. Guarde-o para conciliação e suporte.' },
   { name: 'X-Charged-Amount', example: '0.001', description: 'Valor debitado nesta conversão, em reais, com ponto decimal.' },
   { name: 'X-Balance', example: '9.999', description: 'Saldo restante após a cobrança, em reais, com ponto decimal.' },
-  { name: 'X-Blocked-Resources', example: '0', description: 'Quantidade de recursos externos recusados pela política de recursos (ex.: imagem http, GIF ou endereço interno).' },
+  { name: 'X-Blocked-Resources', example: '0', description: 'Quantidade de recursos externos distintos recusados pela política de recursos (ex.: imagem http, GIF, endereço interno ou acima do limite). Cada URL conta uma vez.' },
   { name: 'X-Source-Code', example: 'https://github.com/…', description: 'Endereço do código-fonte do serviço (exigência da licença AGPL v3).' }
 ];
 

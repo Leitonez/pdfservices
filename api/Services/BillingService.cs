@@ -30,8 +30,8 @@ public class BillingService
         _logger = logger;
     }
 
-    /// <summary>Fails fast before doing the work when the account cannot pay for it.</summary>
-    public async Task EnsureCanAffordAsync(string accountId, decimal price)
+    /// <summary>Loads the account that owns an API key, rejecting the key when the account is missing or not active.</summary>
+    public async Task<AccountDocument> GetActiveAccountAsync(string accountId)
     {
         Versioned<AccountDocument> account = await _accounts.GetAsync(accountId);
         if (account == null || account.Document.Status != AccountStatus.Active)
@@ -39,9 +39,15 @@ public class BillingService
             throw ApiKeyAuthenticator.InvalidKey();
         }
 
-        if (account.Document.Balance < price)
+        return account.Document;
+    }
+
+    /// <summary>Fails fast before doing the work when the account cannot pay for it.</summary>
+    public void EnsureCanAfford(AccountDocument account, decimal price)
+    {
+        if (account.Balance < price)
         {
-            throw InsufficientBalance(account.Document.Balance);
+            throw InsufficientBalance(account.Balance);
         }
     }
 

@@ -164,7 +164,7 @@ export const DocsView = {
               </table>
             </div>
             <ul>
-              <li>Tamanho máximo da requisição: <strong>1 MB</strong>. Para documentos maiores, prefira imagens por URL em vez de embutidas.</li>
+              <li>Tamanho máximo da requisição: <strong>1 MB</strong> por padrão; limites maiores sob consulta pelo <a :href="config.contactUrl">{{ config.contactEmail }}</a>. Para documentos maiores, prefira imagens por URL em vez de embutidas.</li>
               <li>Envie o HTML em <strong>UTF-8</strong>. No formato html, o charset do <code>Content-Type</code> é respeitado; sem charset, assume-se UTF-8.</li>
               <li>Envie um documento completo (<code>&lt;!DOCTYPE html&gt;</code>, <code>&lt;html&gt;</code>, <code>&lt;head&gt;</code> com <code>&lt;style&gt;</code>) para ter controle total do layout.</li>
             </ul>
@@ -229,9 +229,11 @@ export const DocsView = {
             <h3>Imagens</h3>
             <ul>
               <li>Use imagens embutidas via <code>data:</code> URI (recomendado) ou URLs <strong>https públicas, na porta 443</strong>, somente <strong>JPG ou PNG</strong>.</li>
-              <li>Até <strong>20 imagens</strong> externas por documento, <strong>5 MB</strong> cada e <strong>15 MB</strong> no total, com tempo limite de <strong>10 s</strong> para baixá-las.</li>
+              <li>Por padrão, até <strong>20 imagens</strong> externas distintas por documento e <strong>15 MB</strong> no total; limites maiores sob consulta pelo <a :href="config.contactUrl">{{ config.contactEmail }}</a>. Cada imagem pode ter até <strong>5 MB</strong>.</li>
+              <li>Cada URL conta uma vez: a mesma imagem repetida em várias páginas (um logotipo no cabeçalho, por exemplo) é baixada uma única vez.</li>
+              <li>Tempo limite de <strong>10 s</strong> por imagem e de <strong>60 s</strong> no total para baixar as imagens do documento. As imagens são baixadas em paralelo.</li>
               <li>Endereços internos ou privados (localhost, redes locais, metadados de nuvem) são bloqueados.</li>
-              <li>Imagens fora dessas regras são omitidas do PDF e contadas no cabeçalho <code>X-Blocked-Resources</code>.</li>
+              <li>Imagens fora dessas regras são omitidas do PDF, sem erro, e contadas no cabeçalho <code>X-Blocked-Resources</code> (cada URL recusada conta uma vez).</li>
             </ul>
             <code-block :code="imageHtml" lang="html" title="Imagens"></code-block>
             <h3>CSS, fontes e scripts</h3>

@@ -49,6 +49,22 @@ public class AccountDocument
     public DateTime? DeletedAt { get; set; }
 
     public decimal? ForfeitedBalance { get; set; }
+
+    /// <summary>Per-account overrides of the conversion limits. Set manually by the administrator; the API never writes it.</summary>
+    public AccountLimits Limits { get; set; }
+}
+
+/// <summary>
+/// Optional overrides stored in the account document ("limits"). A missing, zero or negative value means
+/// the default from Html2PdfOptions applies.
+/// </summary>
+public class AccountLimits
+{
+    public int? MaxExternalImages { get; set; }
+
+    public int? MaxTotalImageBytes { get; set; }
+
+    public int? MaxRequestBytes { get; set; }
 }
 
 /// <summary>Daily consumption aggregate per capability. Container "accounts", id = usage-{capability}-{yyyy-MM-dd}.</summary>

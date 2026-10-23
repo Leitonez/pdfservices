@@ -336,7 +336,7 @@ export const TestView = {
             </dl>
             <div v-if="result.blocked > 0" class="alert alert-warning" role="note">
               <app-icon name="alert" class="alert-icon"></app-icon>
-              <div>{{ result.blocked }} recurso(s) externo(s) foram ignorados. Só são baixadas imagens JPG/PNG por URL https pública; use <code>data:</code> URI para os demais.</div>
+              <div>{{ result.blocked }} recurso(s) externo(s) foram ignorados. Só são baixadas imagens JPG/PNG por URL https pública, dentro dos limites de quantidade, tamanho e tempo; use <code>data:</code> URI para os demais.</div>
             </div>
             <div class="btn-row">
               <a class="btn btn-primary" :href="result.url" :download="runner.fileName">

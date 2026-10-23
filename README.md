@@ -60,7 +60,7 @@ curl -X POST https://api.pdfservices.sistema.site/v1/html2pdf/html \
 - **Senhas:** PBKDF2-HMAC-SHA256 (600.000 iterações). Bloqueio temporário após 5 tentativas erradas. Respostas genéricas que não revelam e-mails cadastrados.
 - **Sessão do painel:** JWT HS256 (8 h) com *security stamp*: trocar a senha ou excluir a conta invalida todas as sessões.
 - **Chaves de API e tokens de e-mail:** só o SHA-256 é armazenado; a chave completa é exibida uma única vez.
-- **Recursos externos no HTML (SSRF):** imagens por `data:` URI ou por URL `https` pública na porta 443, somente PNG/JPEG (verificados pelos *magic bytes*), com limites de quantidade, tamanho e tempo. Cada conexão, inclusive após redirecionamentos, é validada no nível do socket contra endereços privados, loopback, link-local (metadata), CGNAT e o IP de plataforma do Azure. CSS, fontes, SVG e arquivos locais não são carregados.
+- **Recursos externos no HTML (SSRF):** imagens por `data:` URI ou por URL `https` pública na porta 443, somente PNG/JPEG (verificados pelos *magic bytes*), com limites de quantidade, tamanho e tempo. Cada URL é buscada no máximo uma vez por conversão (o resultado, inclusive a recusa, é reaproveitado), as `<img src>` são baixadas antes do layout com concorrência limitada e há um orçamento de tempo total de busca por conversão. Os limites de quantidade, de tamanho total e do corpo podem ser ajustados por conta (veja **Operação**). Cada conexão, inclusive após redirecionamentos, é validada no nível do socket contra endereços privados, loopback, link-local (metadata), CGNAT e o IP de plataforma do Azure. CSS, fontes, SVG e arquivos locais não são carregados.
 - **Cobrança:** o débito do saldo, o agregado diário, a transação e o registro de acesso são gravados em um único *transactional batch* do Cosmos DB, protegido por ETag. Conversões com erro não são cobradas.
 
 ### Modelo de dados (Cosmos DB, serverless)
@@ -77,6 +77,13 @@ O banco, os containers e o preço inicial (R$ 0,001) são criados automaticament
 
 **Operação:**
 - **Adicionar créditos:** edite o campo `balance` do documento da conta (container `accounts`, `type: "account"`) no Data Explorer. Prefira fazer isso fora dos momentos de uso intenso da conta, para não sobrescrever um débito concorrente.
+- **Limites por conta:** para liberar mais imagens ou um corpo maior a uma conta, adicione o objeto `limits` ao documento da conta no Data Explorer (mesmos cuidados do `balance`). Todos os campos são opcionais; ausentes, zero ou negativos valem os padrões `Html2Pdf__*`. Também é possível definir valores menores que o padrão, para restringir uma conta. A API nunca grava esse campo.
+
+  ```json
+  "limits": { "maxExternalImages": 100, "maxTotalImageBytes": 52428800, "maxRequestBytes": 5242880 }
+  ```
+
+  Faixas recomendadas: `maxExternalImages` até 200, `maxTotalImageBytes` até 100 MB e `maxRequestBytes` até 10 MB. Valores maiores aumentam a memória e o tempo de cada conversão. Os demais limites (https na 443, IPs públicos, PNG/JPEG, 5 MB por imagem, 3 redirecionamentos, 10 s por imagem e o orçamento total) valem para todas as contas.
 - **Alterar o preço:** edite `price` no documento `capability-html2pdf` do container `settings`. A API aplica o novo valor em até 1 minuto.
 
 ## Desenvolvimento local
@@ -110,7 +117,7 @@ Em `localhost`, os frontends apontam para `http://localhost:7215` e usam a chave
 | `Mailgun__BaseUrl` | `https://api.mailgun.net` (US) ou `https://api.eu.mailgun.net` (EU) |
 | `Mailgun__TestMode` | `false` |
 | `App__WebsiteUrl` / `App__AdminUrl` | opcionais; o padrão já são as URLs de produção |
-| `Html2Pdf__*` | opcionais: `MaxRequestBytes`, `MaxExternalImages`, `MaxImageBytes`, `MaxTotalImageBytes`, `ExternalRequestTimeoutSeconds` |
+| `Html2Pdf__*` | opcionais: `MaxRequestBytes` (1 MB), `MaxExternalImages` (20), `MaxImageBytes` (5 MB), `MaxTotalImageBytes` (15 MB), `ExternalRequestTimeoutSeconds` (10), `MaxTotalFetchSeconds` (60: orçamento de tempo de todas as buscas de uma conversão), `PrefetchConcurrency` (4: imagens baixadas ao mesmo tempo antes do layout; `0` desliga a busca antecipada) |
 
 Gerar a chave JWT (PowerShell):
 

@@ -60,6 +60,8 @@ public class Html2PdfFunction
             }
 
             ApiKeyDocument apiKey = await _apiKeys.AuthenticateAsync(req);
+            AccountDocument account = await _billing.GetActiveAccountAsync(apiKey.AccountId);
+            Html2PdfLimits limits = Html2PdfLimits.Resolve(_options, account.Limits);
 
             CapabilityDocument capability = await _capabilities.GetAsync(Capabilities.Html2Pdf);
             if (capability == null || !capability.Enabled)
@@ -67,20 +69,20 @@ public class Html2PdfFunction
                 throw new ApiException(503, "capability_unavailable", "Serviço temporariamente indisponível.");
             }
 
-            byte[] body = await RequestReader.ReadBodyAsync(req, _options.MaxRequestBytes, req.HttpContext.RequestAborted);
+            byte[] body = await RequestReader.ReadBodyAsync(req, limits.MaxRequestBytes, req.HttpContext.RequestAborted);
             string html = normalizedFormat == "json" ? ReadHtmlFromJson(body) : DecodeHtml(body, req.ContentType);
             if (string.IsNullOrWhiteSpace(html))
             {
                 throw new ApiException(400, "empty_html", "O HTML está vazio.");
             }
 
-            await _billing.EnsureCanAffordAsync(apiKey.AccountId, capability.Price);
+            _billing.EnsureCanAfford(account, capability.Price);
 
             Stopwatch stopwatch = Stopwatch.StartNew();
             HtmlToPdfConverter.ConversionResult result;
             try
             {
-                result = await Task.Run(() => _converter.Convert(html));
+                result = await _converter.ConvertAsync(html, limits);
             }
             catch (Exception ex) when (!(ex is ApiException) && !(ex is OperationCanceledException))
             {
@@ -108,8 +110,8 @@ public class Html2PdfFunction
             headers["Content-Disposition"] = "inline; filename=\"document.pdf\"";
 
             _logger.LogInformation(
-                "html2pdf account {AccountId}: {InputBytes} B in, {OutputBytes} B out, {DurationMs} ms, {ExternalImages} external images, {BlockedResources} blocked.",
-                apiKey.AccountId, body.Length, result.Pdf.Length, stopwatch.ElapsedMilliseconds, result.ExternalImages, result.BlockedResources);
+                "html2pdf account {AccountId}: {InputBytes} B in, {OutputBytes} B out, {DurationMs} ms, {ExternalImages} external images, {BlockedResources} blocked, fetch budget exhausted: {FetchBudgetExhausted}.",
+                apiKey.AccountId, body.Length, result.Pdf.Length, stopwatch.ElapsedMilliseconds, result.ExternalImages, result.BlockedResources, result.FetchBudgetExhausted);
 
             return new FileContentResult(result.Pdf, "application/pdf");
         });
